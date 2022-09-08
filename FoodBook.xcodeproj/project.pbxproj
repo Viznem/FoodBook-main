@@ -14,6 +14,7 @@
 		6720544B28C9BFBE00742232 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6720544A28C9BFBE00742232 /* FirebaseFirestoreSwift */; };
 		6720544D28C9BFBE00742232 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6720544C28C9BFBE00742232 /* FirebaseStorage */; };
 		6720544F28C9BFBE00742232 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 6720544E28C9BFBE00742232 /* FirebaseStorageCombine-Community */; };
+		6720545128CA0C5C00742232 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6720545028CA0C5C00742232 /* ImagePicker.swift */; };
 		677E345128C71ADE0079BE41 /* FoodBookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677E345028C71ADE0079BE41 /* FoodBookApp.swift */; };
 		677E345328C71ADE0079BE41 /* CoreDataSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677E345228C71ADE0079BE41 /* CoreDataSample.swift */; };
 		677E345528C71ADF0079BE41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 677E345428C71ADF0079BE41 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6720545028CA0C5C00742232 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		677E344D28C71ADE0079BE41 /* FoodBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		677E345028C71ADE0079BE41 /* FoodBookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodBookApp.swift; sourceTree = "<group>"; };
 		677E345228C71ADE0079BE41 /* CoreDataSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSample.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				677E345428C71ADF0079BE41 /* Assets.xcassets */,
 				677E346D28C7487A0079BE41 /* VIew */,
 				677E345928C71ADF0079BE41 /* Persistence.swift */,
+				6720545028CA0C5C00742232 /* ImagePicker.swift */,
 				677E345B28C71ADF0079BE41 /* FoodBook.xcdatamodeld */,
 				677E346828C746560079BE41 /* GoogleService-Info.plist */,
 				677E345628C71ADF0079BE41 /* Preview Content */,
@@ -190,6 +193,7 @@
 				677E345D28C71ADF0079BE41 /* FoodBook.xcdatamodeld in Sources */,
 				677E345A28C71ADF0079BE41 /* Persistence.swift in Sources */,
 				677E345328C71ADE0079BE41 /* CoreDataSample.swift in Sources */,
+				6720545128CA0C5C00742232 /* ImagePicker.swift in Sources */,
 				677E346B28C748570079BE41 /* LoginView.swift in Sources */,
 				677E347128C769780079BE41 /* HomePageView.swift in Sources */,
 				677E345128C71ADE0079BE41 /* FoodBookApp.swift in Sources */,

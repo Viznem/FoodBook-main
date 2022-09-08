@@ -7,12 +7,15 @@
 
 import SwiftUI
 import Firebase
+import FirebaseStorage
 
 class LoginViewModel: ObservableObject {
     
     let auth = Auth.auth()
+    let storage = Storage.storage()
     
     @Published var loggedIn = false
+    @Published var loginStatusMessage = ""
     
     var isLoggedIn: Bool {
         return auth.currentUser != nil
@@ -32,19 +35,46 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    func register(email: String, password: String) {
+    func register(email: String, password: String, image: UIImage) {
         auth.createUser(withEmail: email,
                         password: password) { [weak self] result, error in
             
             guard result != nil, error == nil else {
+                self?.loginStatusMessage = "Failed to create user! Email/Password already exist"
                 return
             }
             //Success
             DispatchQueue.main.async {
+                self?.loginStatusMessage = "Successfully Create User!"
                 self?.loggedIn = true
             }
-
+            
+            self?.persistImageToStorage(image: image)
         }
+    }
+    
+    func persistImageToStorage(image: UIImage) {
+        guard let uid = auth.currentUser?.uid else {return}
+        let ref = storage.reference(withPath: uid)
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+            return
+        }
+        ref.putData(imageData, metadata: nil) { metadata, error in
+            if let error = error {
+                self.loginStatusMessage = "Failed to push image to Storage: \(error)"
+                return
+            }
+            
+            ref.downloadURL { url, error in
+                if let error = error {
+                    self.loginStatusMessage = "Failed to retrieve downloadURL: \(error)"
+                    return
+                }
+                self.loginStatusMessage = "Successfully stored image: \(url?.absoluteString ?? "")"
+            }
+            
+        }
+        
     }
     
     func signOut() {
@@ -170,7 +200,12 @@ struct SignIn: View {
 struct SignUp: View {
     @State private var email = ""
     @State private var password = ""
+    @State private var image: UIImage?
+    @State private var shouldShowImagePicker = false
+    
     @EnvironmentObject var loginViewModel: LoginViewModel
+    
+    let defaultImage = UIImage(named: "defaultIcon")
     
     var body: some View {
         ZStack{
@@ -189,6 +224,32 @@ struct SignUp: View {
                     .foregroundColor(.white)
                     .font(.system(size: 40, weight: .bold, design: .rounded))
                     .offset(x: -70, y: -100)
+                
+                Button{
+                    shouldShowImagePicker.toggle()
+                }label: {
+                    
+                    VStack {
+                        
+                        if let image = self.image {
+                            Image(uiImage: image)
+                                .resizable()
+                                .frame(width: 100, height: 100)
+                                .scaledToFill()
+                                .cornerRadius(100)
+                            
+                        } else {
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 100))
+                                .padding()
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .overlay(RoundedRectangle(cornerRadius: 100)
+                        .stroke(Color.white, lineWidth: 3)
+                    )
+                    
+                }
                     
                 
                 TextField("Email", text: $email)
@@ -222,9 +283,10 @@ struct SignUp: View {
                     .frame(width: 350, height: 1)
                     .foregroundColor(.white)
                 
+                
                 // SIGN UP BUTTON
                 Button {
-                    loginViewModel.register(email: email, password: password)
+                    loginViewModel.register(email: email, password: password, image: (image ?? defaultImage)!)
                 }label: {
                      Text("Sign Up")
                         .bold()
@@ -239,11 +301,19 @@ struct SignUp: View {
                 .padding(.top)
                 .offset(y: 110)
                 
+                
+                Text(loginViewModel.loginStatusMessage)
+                    .foregroundColor(.red)
+                    .bold()
+                
             }//VStack
             .frame(width: 350)
         
         }//Zstack
         .ignoresSafeArea()
+        .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
+            ImagePicker(image: $image)
+        }
     }
 }
 
