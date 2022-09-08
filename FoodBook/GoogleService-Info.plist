@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>591263052980-78201chg3jancst0dem9j79vaf3kj5m2.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.591263052980-78201chg3jancst0dem9j79vaf3kj5m2</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBwS7y9EJNbu_pFagiv8pu6OXKMPiN_CN4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>591263052980</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>vn.edu.rmit.s3777196.FoodBook</string>
+	<key>PROJECT_ID</key>
+	<string>foodbookswiftui</string>
+	<key>STORAGE_BUCKET</key>
+	<string>foodbookswiftui.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:591263052980:ios:7cadfd9ab89ca5805c53e1</string>
+</dict>
+</plist>
