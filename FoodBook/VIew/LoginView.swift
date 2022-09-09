@@ -113,7 +113,7 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             if loginViewModel.isLoggedIn {
-               HomePageView()
+                HomePageView(isOpen: .constant(false))
             }
             else {
                 SignIn()
