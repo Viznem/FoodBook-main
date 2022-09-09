@@ -21,7 +21,6 @@ struct FoodBookApp: App {
             let loginViewModel = LoginViewModel()
             LoginView()
                 .environmentObject(loginViewModel)
-            
         }
     }
 }

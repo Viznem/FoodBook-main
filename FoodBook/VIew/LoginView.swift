@@ -8,6 +8,10 @@
 import SwiftUI
 import Firebase
 import FirebaseStorage
+import FirebaseCore
+import FirebaseFirestore
+
+
 
 class LoginViewModel: ObservableObject {
     
@@ -45,11 +49,29 @@ class LoginViewModel: ObservableObject {
             }
             //Success
             DispatchQueue.main.async {
+
+                let db = Firestore.firestore()
+                
                 self?.loginStatusMessage = "Successfully Create User!"
                 self?.loggedIn = true
+                self?.persistImageToStorage(image: image)
+                guard let uid = self?.auth.currentUser?.uid else {return}
+                // Add a new document with a generated ID
+                var ref: DocumentReference? = nil
+                ref = db.collection("users").addDocument(data: [
+                    "uid": uid,
+                    "recipes": [],
+                    "favorites": []
+                ]) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document added with ID: \(ref!.documentID)")
+                    }
+                }
+                
             }
             
-            self?.persistImageToStorage(image: image)
         }
     }
     
