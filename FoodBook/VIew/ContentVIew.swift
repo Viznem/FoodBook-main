@@ -45,13 +45,17 @@ struct ContentVIew: View {
                 .shadow(radius: 5)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .onTapGesture {
+                    
                     menuButton.setInput("isOpen", value: isOpen)
+                    
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.7)){
                         isOpen.toggle()
                     }
                 }
+                                
             
         }//ZStack
+        
     }
 }
 

@@ -33,11 +33,12 @@ struct MenuView: View {
                         .font(.subheadline)
                         .opacity(0.7)
                 }
+                
                 Spacer()
                 
             }//HStack
-            .padding()
-            
+            .padding(.top, 70)
+            .padding(.bottom, 20)
             VStack{
                 
                 Rectangle()

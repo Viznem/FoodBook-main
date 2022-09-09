@@ -111,9 +111,11 @@ struct LoginView: View {
     @EnvironmentObject var loginViewModel: LoginViewModel
     
     var body: some View {
-        NavigationView {
+        
+        ZStack{
             if loginViewModel.isLoggedIn {
-                HomePageView(isOpen: .constant(false))
+                ContentVIew()
+                
             }
             else {
                 SignIn()
