@@ -112,10 +112,9 @@ struct LoginView: View {
     
     var body: some View {
         
-        ZStack{
+        NavigationView{
             if loginViewModel.isLoggedIn {
                 ContentVIew()
-                
             }
             else {
                 SignIn()
@@ -205,6 +204,7 @@ struct SignIn: View {
                     Text("Don't have an account?")
                         .bold()
                         .foregroundColor(.white)
+                    
                     NavigationLink("Create", destination: SignUp())
                 }
                 .padding(.top)
