@@ -9,22 +9,20 @@ import SwiftUI
 
 struct UserRecipeView: View {
     @Binding var isOpen: Bool
+    @State private var showCRUDview = false
     
     var body: some View {
         ZStack{
             Color(.white).ignoresSafeArea()
-            
             VStack{
-                
-                HStack{
-                    
-                    Text("User Recipes (CRUD)")
-                    
-                    
-                }//HStack
-                
+                    Button{
+                        showCRUDview.toggle()
+                    }label: {
+                        Text("ADD")
+                    }.sheet(isPresented: $showCRUDview){
+                        CRUDView()
+                    }
             }//VStack
-            
         }//ZStack
         .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
         .rotation3DEffect(.degrees(isOpen ? 30: 0), axis: (x: 0, y: -1, z: 0))
