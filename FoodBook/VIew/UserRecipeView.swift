@@ -12,15 +12,13 @@ struct UserRecipeView: View {
     @State private var showCRUDview = false
     
     var body: some View {
-        NavigationView{
             ZStack{
-                Rectangle()
-                    .foregroundColor(.blue)
-                    .opacity(0.55)
-                    .ignoresSafeArea()
-                VStack{
-                }//VStack
-            }//ZStack
+                NavigationView{
+                    VStack{
+                        
+                    }//VStack
+                
+                }//ZStack
             .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
             .rotation3DEffect(.degrees(isOpen ? 30: 0), axis: (x: 0, y: -1, z: 0))
             .offset(x: isOpen ? 265 : 0)
