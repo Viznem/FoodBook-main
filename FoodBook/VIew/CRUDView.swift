@@ -19,7 +19,7 @@ struct CRUDView: View {
         db.collection("Food").addDocument(data: ["name": nameFieldText, "type": typeOfFoodSelection, "region": regionOfFoodSelection,"description": descriptionFieldText]){
             error in
             if error == nil{
-                self.getData()
+                self.getFood()
             }
             else{
                 
@@ -27,7 +27,7 @@ struct CRUDView: View {
         }
     }
     
-    func getData(){
+    func getFood(){
         let db = Firestore.firestore()
         
         db.collection("Food").getDocuments{

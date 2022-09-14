@@ -10,6 +10,7 @@
 		3EE67D5828D044EB0023EBC5 /* CRUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE67D5728D044EB0023EBC5 /* CRUDView.swift */; };
 		3EE67D5B28D04C690023EBC5 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE67D5A28D04C690023EBC5 /* Food.swift */; };
 		3EF57C1928D19F5D00BF16A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF57C1828D19F5D00BF16A5 /* User.swift */; };
+		3EF57C1D28D1B26900BF16A5 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF57C1C28D1B26900BF16A5 /* RecipeDetailView.swift */; };
 		6720544328C9BFBE00742232 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6720544228C9BFBE00742232 /* FirebaseAuth */; };
 		6720544528C9BFBE00742232 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 6720544428C9BFBE00742232 /* FirebaseAuthCombine-Community */; };
 		6720544728C9BFBE00742232 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6720544628C9BFBE00742232 /* FirebaseFirestore */; };
@@ -44,6 +45,7 @@
 		3EE67D5728D044EB0023EBC5 /* CRUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDView.swift; sourceTree = "<group>"; };
 		3EE67D5A28D04C690023EBC5 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		3EF57C1828D19F5D00BF16A5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3EF57C1C28D1B26900BF16A5 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		6720545028CA0C5C00742232 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		677E344D28C71ADE0079BE41 /* FoodBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		677E345028C71ADE0079BE41 /* FoodBookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodBookApp.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				678BAD1F28CB447700790C07 /* FavoritesView.swift */,
 				678BAD2128CB45D600790C07 /* MessagesView.swift */,
 				678BAD2928CB48EA00790C07 /* UserRecipeView.swift */,
+				3EF57C1C28D1B26900BF16A5 /* RecipeDetailView.swift */,
 				3EE67D5728D044EB0023EBC5 /* CRUDView.swift */,
 			);
 			path = VIew;
@@ -271,6 +274,7 @@
 				678BAD2228CB45D600790C07 /* MessagesView.swift in Sources */,
 				678BAD2A28CB48EA00790C07 /* UserRecipeView.swift in Sources */,
 				3EE67D5B28D04C690023EBC5 /* Food.swift in Sources */,
+				3EF57C1D28D1B26900BF16A5 /* RecipeDetailView.swift in Sources */,
 				678BAD1E28CB3A5A00790C07 /* ContentVIew.swift in Sources */,
 				677E346B28C748570079BE41 /* LoginView.swift in Sources */,
 				678BAD2028CB447700790C07 /* FavoritesView.swift in Sources */,
