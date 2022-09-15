@@ -6,24 +6,31 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseStorage
+import FirebaseFirestore
 
 struct UserRecipeView: View {
+    @ObservedObject var foods = FoodViewModel()
     @Binding var isOpen: Bool
-    @Binding var foods: [Food]
     @State private var showCRUDview = false
+    
+    init(Food: Food) {
+        foods.getFood()
+    }
     
     var body: some View {
         ZStack{
                 NavigationView{
-//                    List{
-//                        ForEach(0...foods.count-1, id: \.self){
-//                            food in NavigationLink{
-//                                RecipeDetailView(food: $foods[food])
-//                            } label: {
-//                                Text(food.name)
-//                            }
-//                        }
-//                    }
+                    List{
+                        ForEach(foods.foodList){
+                            food in NavigationLink{
+                                RecipeDetailView(food: food)
+                            } label: {
+                                Text(food.name)
+                            }
+                        }
+                    }
                 }//ZStack
                 .navigationTitle("User's list of recipe")
                 .toolbar{
@@ -31,12 +38,12 @@ struct UserRecipeView: View {
                         Button{
                             showCRUDview.toggle()
                         }label: {
-                            Text("ADD")
+                            Text("Add a new recipe")
                         }.sheet(isPresented: $showCRUDview){
                             CRUDView()
                         }
                     }
-                }
+            }
         }
             .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
             .rotation3DEffect(.degrees(isOpen ? 30: 0), axis: (x: 0, y: -1, z: 0))
@@ -44,4 +51,5 @@ struct UserRecipeView: View {
             .scaleEffect(isOpen ? 0.9 : 1)
             .ignoresSafeArea()
     }
+    
 }

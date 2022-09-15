@@ -39,6 +39,7 @@
 		678BAD2028CB447700790C07 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678BAD1F28CB447700790C07 /* FavoritesView.swift */; };
 		678BAD2228CB45D600790C07 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678BAD2128CB45D600790C07 /* MessagesView.swift */; };
 		678BAD2A28CB48EA00790C07 /* UserRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678BAD2928CB48EA00790C07 /* UserRecipeView.swift */; };
+		9B0F5B4728D2E9F300341834 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0F5B4628D2E9F300341834 /* FoodViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		678BAD1F28CB447700790C07 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		678BAD2128CB45D600790C07 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		678BAD2928CB48EA00790C07 /* UserRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecipeView.swift; sourceTree = "<group>"; };
+		9B0F5B4628D2E9F300341834 /* FoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			children = (
 				3EE67D5A28D04C690023EBC5 /* Food.swift */,
 				3EF57C1828D19F5D00BF16A5 /* User.swift */,
+				9B0F5B4628D2E9F300341834 /* FoodViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -146,8 +149,8 @@
 				678BAD1F28CB447700790C07 /* FavoritesView.swift */,
 				678BAD2128CB45D600790C07 /* MessagesView.swift */,
 				678BAD2928CB48EA00790C07 /* UserRecipeView.swift */,
-				3EF57C1C28D1B26900BF16A5 /* RecipeDetailView.swift */,
 				3EE67D5728D044EB0023EBC5 /* CRUDView.swift */,
+				3EF57C1C28D1B26900BF16A5 /* RecipeDetailView.swift */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				6720545128CA0C5C00742232 /* ImagePicker.swift in Sources */,
 				3EE67D5828D044EB0023EBC5 /* CRUDView.swift in Sources */,
 				678BAD2228CB45D600790C07 /* MessagesView.swift in Sources */,
+				9B0F5B4728D2E9F300341834 /* FoodViewModel.swift in Sources */,
 				678BAD2A28CB48EA00790C07 /* UserRecipeView.swift in Sources */,
 				3EE67D5B28D04C690023EBC5 /* Food.swift in Sources */,
 				3EF57C1D28D1B26900BF16A5 /* RecipeDetailView.swift in Sources */,

@@ -8,7 +8,8 @@
 import SwiftUI
 import Foundation
 
-struct Food: Codable{
+struct Food: Identifiable{
+    
     var id: String
     var name: String
     var type: String
