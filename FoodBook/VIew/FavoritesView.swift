@@ -14,16 +14,15 @@ struct FavoritesView: View {
         ZStack{
             Color(.white).ignoresSafeArea()
             
-            VStack{
-                
-                HStack{
-                    
-                    Text("Favorites Recipes")
-                    
-                    
-                }//HStack
-                
-            }//VStack
+            NavigationView{
+                VStack{
+                    ScrollView{
+                        Text("Favorites Page")
+                    }
+                }//VStack
+            }//NavigationView
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarHidden(true)
             
         }//ZStack
         .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
