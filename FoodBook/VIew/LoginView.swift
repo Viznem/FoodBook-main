@@ -49,8 +49,9 @@ class LoginViewModel: ObservableObject {
             }
             //Success
             DispatchQueue.main.async {
+                
+                let db = Firestore.firestore()
 
-//                let db = Firestore.firestore()
                 
                 self?.loginStatusMessage = "Successfully Create User!"
                 self?.loggedIn = true
@@ -94,7 +95,7 @@ class LoginViewModel: ObservableObject {
                     return
                 }
                 self.loginStatusMessage = "Successfully stored image: \(url?.absoluteString ?? "")"
-                
+
                 //Store user information to firestore
                 guard let url = url else {return}
                 self.storeUserInformation(imageProfileUrl: url)
@@ -118,6 +119,24 @@ class LoginViewModel: ObservableObject {
             print("Success")
         }
     }
+    
+    private func storeUserInformation(imageProfileUrl: URL) {
+        guard let uid = auth.currentUser?.uid else {return}
+        guard let email = auth.currentUser?.email else {return}
+        let db = Firestore.firestore()
+        
+        let userData = ["email": email,"uid" : uid,"profileImageUrl": imageProfileUrl.absoluteString,"recipes": [],"favorites": []] as [String : Any]
+        
+        db.collection("users").document(uid).setData(userData) { err in
+            if let err = err {
+                print(err)
+                self.loginStatusMessage = "\(err)"
+                return
+            }
+            print("Success")
+        }
+    }
+    
     
     func signOut() {
         try? auth.signOut()
@@ -164,7 +183,7 @@ struct SignIn: View {
                 .frame(width: 1000, height: 400)
                 .rotationEffect(.degrees(135))
                 .offset(y: -350)
-                
+            
             
             VStack(spacing: 20){
                 
@@ -173,7 +192,7 @@ struct SignIn: View {
                     .font(.system(size: 40, weight: .bold, design: .rounded))
                     .offset(x: -70, y:-90)
                 
-                    
+                
                 
                 TextField("Email", text: $email)
                     .disableAutocorrection(true)
@@ -181,15 +200,15 @@ struct SignIn: View {
                     .foregroundColor(.white)
                     .textFieldStyle(.plain)
                     .placeholder(when: email.isEmpty) {
-                                 Text("Email")
-                                    .foregroundColor(.white)
-                                    .bold()
+                        Text("Email")
+                            .foregroundColor(.white)
+                            .bold()
                     }
                 
                 Rectangle()
                     .frame(width: 350, height: 1)
                     .foregroundColor(.white)
-                    
+                
                 
                 SecureField("Password", text: $password)
                     .disableAutocorrection(true)
@@ -197,9 +216,9 @@ struct SignIn: View {
                     .foregroundColor(.white)
                     .textFieldStyle(.plain)
                     .placeholder(when: password.isEmpty) {
-                            Text("Password")
-                                .foregroundColor(.white)
-                                .bold()
+                        Text("Password")
+                            .foregroundColor(.white)
+                            .bold()
                     }
                 
                 Rectangle()
@@ -210,13 +229,13 @@ struct SignIn: View {
                 Button {
                     loginViewModel.login(email: email, password: password)
                 }label: {
-                     Text("Sign In")
+                    Text("Sign In")
                         .bold()
                         .frame(width: 200, height: 40)
                         .background(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                                 .fill(.linearGradient(colors: [.pink, .red], startPoint: .top, endPoint: .bottomTrailing))
-                               
+                            
                         )
                         .foregroundColor(.white)
                 }// SIGN UP BUTTON
@@ -232,12 +251,12 @@ struct SignIn: View {
                 }
                 .padding(.top)
                 .offset(y: 110)
-               
+                
                 
                 
             }//VStack
             .frame(width: 350)
-        
+            
         }//Zstack
         .ignoresSafeArea()
     }
@@ -263,7 +282,7 @@ struct SignUp: View {
                 .frame(width: 1000, height: 400)
                 .rotationEffect(.degrees(135))
                 .offset(y: -350)
-                
+            
             
             VStack(spacing: 20){
                 
@@ -297,7 +316,7 @@ struct SignUp: View {
                     )
                     
                 }
-                    
+                
                 
                 TextField("Email", text: $email)
                     .disableAutocorrection(true)
@@ -305,15 +324,15 @@ struct SignUp: View {
                     .foregroundColor(.white)
                     .textFieldStyle(.plain)
                     .placeholder(when: email.isEmpty) {
-                                 Text("Email")
-                                    .foregroundColor(.white)
-                                    .bold()
+                        Text("Email")
+                            .foregroundColor(.white)
+                            .bold()
                     }
                 
                 Rectangle()
                     .frame(width: 350, height: 1)
                     .foregroundColor(.white)
-                    
+                
                 
                 SecureField("Password", text: $password)
                     .disableAutocorrection(true)
@@ -321,9 +340,9 @@ struct SignUp: View {
                     .foregroundColor(.white)
                     .textFieldStyle(.plain)
                     .placeholder(when: password.isEmpty) {
-                            Text("Password")
-                                .foregroundColor(.white)
-                                .bold()
+                        Text("Password")
+                            .foregroundColor(.white)
+                            .bold()
                     }
                 
                 Rectangle()
@@ -335,13 +354,13 @@ struct SignUp: View {
                 Button {
                     loginViewModel.register(email: email, password: password, image: (image ?? defaultImage)!)
                 }label: {
-                     Text("Sign Up")
+                    Text("Sign Up")
                         .bold()
                         .frame(width: 200, height: 40)
                         .background(
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                                 .fill(.linearGradient(colors: [.pink, .red], startPoint: .top, endPoint: .bottomTrailing))
-                               
+                            
                         )
                         .foregroundColor(.white)
                 }// SIGN UP BUTTON
@@ -355,7 +374,7 @@ struct SignUp: View {
                 
             }//VStack
             .frame(width: 350)
-        
+            
         }//Zstack
         .ignoresSafeArea()
         .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
@@ -369,7 +388,7 @@ struct LoginView_Previews: PreviewProvider {
         let loginViewModel = LoginViewModel()
         LoginView()
             .environmentObject(loginViewModel)
-            
+        
     }
 }
 
@@ -381,11 +400,11 @@ extension View {
         when shouldShow: Bool,
         alignment: Alignment = .leading,
         @ViewBuilder placeholder: () -> Content) -> some View {
-
-        ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
-            self
+            
+            ZStack(alignment: alignment) {
+                placeholder().opacity(shouldShow ? 1 : 0)
+                self
+            }
         }
-    }
 }
 

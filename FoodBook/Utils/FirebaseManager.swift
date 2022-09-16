@@ -2,8 +2,13 @@
 //  FirebaseManager.swift
 //  FoodBook
 //
+//  Created by An Pham Hoang Thien on 16/09/2022.
 //  Created by Thinh, Nguyen Truong on 15/09/2022.
-//
+
+
+import SwiftUI
+
+
 
 import Foundation
 import Firebase
