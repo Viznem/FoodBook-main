@@ -8,14 +8,14 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct User {
+struct ChatUser {
     let uid, email, profileImageUrl: String
 }
 
 class MessagesViewModel: ObservableObject {
     
     @Published var errorMessage = ""
-    @Published var user: User?
+    @Published var user: ChatUser?
     
     init() {
         fetchCurrentUser()
@@ -45,7 +45,7 @@ class MessagesViewModel: ObservableObject {
                 let email = data["email"] as? String ?? ""
                 let profileImageUrl = data["profileImageUrl"] as? String ?? ""
                 
-                self.user = User(uid: uid, email: email, profileImageUrl: profileImageUrl)
+                self.user = ChatUser(uid: uid, email: email, profileImageUrl: profileImageUrl)
             }
     }
     

@@ -49,10 +49,7 @@ class LoginViewModel: ObservableObject {
             }
             //Success
             DispatchQueue.main.async {
-                
-                let db = Firestore.firestore()
-
-                
+                                
                 self?.loginStatusMessage = "Successfully Create User!"
                 self?.loggedIn = true
                 self?.persistImageToStorage(image: image)
@@ -120,22 +117,6 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    private func storeUserInformation(imageProfileUrl: URL) {
-        guard let uid = auth.currentUser?.uid else {return}
-        guard let email = auth.currentUser?.email else {return}
-        let db = Firestore.firestore()
-        
-        let userData = ["email": email,"uid" : uid,"profileImageUrl": imageProfileUrl.absoluteString,"recipes": [],"favorites": []] as [String : Any]
-        
-        db.collection("users").document(uid).setData(userData) { err in
-            if let err = err {
-                print(err)
-                self.loginStatusMessage = "\(err)"
-                return
-            }
-            print("Success")
-        }
-    }
     
     
     func signOut() {

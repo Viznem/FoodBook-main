@@ -15,7 +15,7 @@ class FoodViewModel: ObservableObject {
     
     func getFood(){
         let db = Firestore.firestore()
-        db.collection("users")..getDocuments{
+        db.collection("Food").getDocuments{
             snapshot, error in
             if error == nil{
                 if let snapshot = snapshot{
