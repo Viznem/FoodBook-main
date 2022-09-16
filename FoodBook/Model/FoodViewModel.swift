@@ -15,7 +15,8 @@ class FoodViewModel: ObservableObject {
     
     func getFood(){
         let db = Firestore.firestore()
-        db.collection("Food").getDocuments{
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
+        db.collection("users").document(uid).collection("foods").getDocuments{
             snapshot, error in
             if error == nil{
                 if let snapshot = snapshot{
@@ -37,32 +38,33 @@ class FoodViewModel: ObservableObject {
         }
     }
     
-//    func deleteFood(foodDelete: Food) {
-//
-//            // Get a reference to the database
-//            let db = Firestore.firestore()
-//
-//            // Specify the document to delete
-//            db.collection("Food").document(foodDelete.id).delete { error in
-//
-//                // Check for errors
-//                if error == nil {
-//                    // No errors
-//
-//                    // Update the UI from the main thread
-//                    DispatchQueue.main.async {
-//
-//                        // Remove the todo that was just deleted
-//                        self.foodList.removeAll { food in
-//                            //Return the food id that needed to delete
-//                            return food.id == foodDelete.id
-//                        }
-//                    }
-//
-//
-//                }
-//            }
-//
-//        }
+    func deleteFood(foodDelete: Food) {
+
+            // Get a reference to the database
+            let db = Firestore.firestore()
+            guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
+            // Specify the document to delete
+        db.collection("users").document(uid).collection("foods").document(foodDelete.name).delete{ error in
+            
+            // Check for errors
+            if error == nil {
+                // No errors
+                
+                // Update the UI from the main thread
+                DispatchQueue.main.async {
+                    
+                    // Remove the todo that was just deleted
+                    self.foodList.removeAll { food in
+                        // Check for the food to remove
+                        return food.name == foodDelete.name
+                        
+                    }
+                }
+                
+                
+            }
+        }
+        
+    }
 }
 

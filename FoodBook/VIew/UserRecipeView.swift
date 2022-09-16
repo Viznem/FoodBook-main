@@ -37,11 +37,19 @@ struct UserRecipeView: View {
                             food in NavigationLink{
                                 RecipeDetailView(food: food)
                             } label: {
+                                HStack{
                                 Text(food.name)
+                                    Button(action: {
+                                        foods.deleteFood(foodDelete: food)
+                                        }, label: {
+                                                Image(systemName: "minus.circle")
+                                            })
+                                            .buttonStyle(BorderlessButtonStyle())
+                                    }
+                                }
                             }
                         }
-                    }
-                }//ZStack
+                }
                 .navigationTitle("User's list of recipe")
                 .toolbar{
                     ToolbarItem(placement: .navigationBarTrailing){
@@ -53,15 +61,16 @@ struct UserRecipeView: View {
                             CRUDView()
                         }
                     }
-            }
-        }
-            .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
-            .rotation3DEffect(.degrees(isOpen ? 30: 0), axis: (x: 0, y: -1, z: 0))
-            .offset(x: isOpen ? 265 : 0)
-            .scaleEffect(isOpen ? 0.9 : 1)
-            .ignoresSafeArea()
+                }
+            
+        }//ZStack
+        .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
+        .rotation3DEffect(.degrees(isOpen ? 30: 0), axis: (x: 0, y: -1, z: 0))
+        .offset(x: isOpen ? 265 : 0)
+        .scaleEffect(isOpen ? 0.9 : 1)
+        .ignoresSafeArea()
+
     }
-    
 }
 
 //struct UserRecipeView_Previews: PreviewProvider {

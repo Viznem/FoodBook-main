@@ -14,7 +14,7 @@ class CRUDViewModel: ObservableObject{
 struct CRUDView: View {
     @EnvironmentObject var CRUDViewModel: CRUDViewModel
     @State private var showCRUDview = false
-
+    
     @State var list = [Food]()
     
     func addFood(name: String, type: String, region: String, description: String){
