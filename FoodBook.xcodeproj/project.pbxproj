@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3EE67D5828D044EB0023EBC5 /* CRUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE67D5728D044EB0023EBC5 /* CRUDView.swift */; };
 		3EE67D5B28D04C690023EBC5 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE67D5A28D04C690023EBC5 /* Food.swift */; };
+		6715B0CB28D447DF00A49C52 /* AddMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6715B0CA28D447DF00A49C52 /* AddMessageView.swift */; };
 		6720544328C9BFBE00742232 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6720544228C9BFBE00742232 /* FirebaseAuth */; };
 		6720544528C9BFBE00742232 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 6720544428C9BFBE00742232 /* FirebaseAuthCombine-Community */; };
 		6720544728C9BFBE00742232 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6720544628C9BFBE00742232 /* FirebaseFirestore */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		3EE67D5728D044EB0023EBC5 /* CRUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDView.swift; sourceTree = "<group>"; };
 		3EE67D5A28D04C690023EBC5 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		6715B0CA28D447DF00A49C52 /* AddMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMessageView.swift; sourceTree = "<group>"; };
 		6720545028CA0C5C00742232 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		677E344D28C71ADE0079BE41 /* FoodBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		677E345028C71ADE0079BE41 /* FoodBookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodBookApp.swift; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		6715B0C928D4477600A49C52 /* AddMessageView */ = {
+			isa = PBXGroup;
+			children = (
+				6715B0CA28D447DF00A49C52 /* AddMessageView.swift */,
+			);
+			path = AddMessageView;
+			sourceTree = "<group>";
+		};
 		677E344428C71ADE0079BE41 = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +149,7 @@
 		677E346D28C7487A0079BE41 /* VIew */ = {
 			isa = PBXGroup;
 			children = (
+				6715B0C928D4477600A49C52 /* AddMessageView */,
 				678BAD1D28CB3A5A00790C07 /* ContentVIew.swift */,
 				678BAD1A28CB0E1F00790C07 /* MenuView */,
 				677E346A28C748570079BE41 /* LoginView.swift */,
@@ -282,6 +293,7 @@
 				3EE67D5828D044EB0023EBC5 /* CRUDView.swift in Sources */,
 				678BAD2228CB45D600790C07 /* MessagesView.swift in Sources */,
 				678BAD2A28CB48EA00790C07 /* UserRecipeView.swift in Sources */,
+				6715B0CB28D447DF00A49C52 /* AddMessageView.swift in Sources */,
 				3EE67D5B28D04C690023EBC5 /* Food.swift in Sources */,
 				678BAD1E28CB3A5A00790C07 /* ContentVIew.swift in Sources */,
 				677E346B28C748570079BE41 /* LoginView.swift in Sources */,

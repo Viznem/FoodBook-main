@@ -53,6 +53,8 @@ class MessagesViewModel: ObservableObject {
 
 struct MessagesView: View {
     @State var shouldShowLogOutOptions = false
+    @State var showMessageScreen = false
+    
     @EnvironmentObject var loginViewModel: LoginViewModel
     @ObservedObject var vm = MessagesViewModel()
     @Binding var isOpen: Bool
@@ -115,7 +117,7 @@ struct MessagesView: View {
     
     private var newMessageButton: some View {
            Button {
-            //
+               showMessageScreen.toggle()
            } label: {
                HStack {
                    Spacer()
@@ -129,6 +131,9 @@ struct MessagesView: View {
                    .cornerRadius(32)
                    .padding(.horizontal)
                    .shadow(radius: 15)
+           }
+           .fullScreenCover(isPresented: $showMessageScreen) {
+               AddMessageView()
            }
        }
     
