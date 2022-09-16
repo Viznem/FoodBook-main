@@ -50,18 +50,24 @@ struct AddMessageView: View {
                    Text(vm.errorMessage)
                    
                    ForEach(vm.users) { user in
-                       HStack{
-                           WebImage(url: URL(string: user.profileImageUrl))
-                               .resizable()
-                               .frame(width: 50, height: 50)
-                               .clipped()
-                               .cornerRadius(50)
-                               .overlay(RoundedRectangle(cornerRadius: 50)
-                                .stroke(Color(.label), lineWidth: 2)
-                               )
-                           Text(user.email)
-                           Spacer()
-                       }.padding(.horizontal)
+                       Button {
+                           presentationMode.wrappedValue.dismiss()
+                       } label: {
+                           HStack(spacing: 16) {
+                               WebImage(url: URL(string: user.profileImageUrl))
+                                   .resizable()
+                                   .scaledToFill()
+                                   .frame(width: 50, height: 50)
+                                   .clipped()
+                                   .cornerRadius(50)
+                                   .overlay(RoundedRectangle(cornerRadius: 50)
+                                               .stroke(Color(.label), lineWidth: 2)
+                                   )
+                               Text(user.email)
+                                   .foregroundColor(Color(.label))
+                               Spacer()
+                           }.padding(.horizontal)
+                       }
                        Divider()
                            .padding(.vertical, 8)
                    }
