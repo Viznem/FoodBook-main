@@ -16,25 +16,28 @@ struct HomePageView: View {
         ZStack{
             Color(.white).ignoresSafeArea()
             
-            VStack{
-                
-                HStack{
-                    
-                    Text("You are signed in")
-                    
-                    Button {
-                        loginViewModel.signOut()
-                    } label: {
-                        Text("Sign Out")
-                            .frame(width: 80, height: 50)
-                            .background(Color.green)
-                            .foregroundColor(Color.blue)
+            NavigationView{
+                VStack{
+                    ScrollView{
+                        HStack{
+                            
+                            Text("You are signed in")
+                            
+                            Button {
+                                loginViewModel.signOut()
+                            } label: {
+                                Text("Sign Out")
+                                    .frame(width: 80, height: 50)
+                                    .background(Color.green)
+                                    .foregroundColor(Color.blue)
+                            }
+                        }//HStack
                     }
-                }//HStack
-                
-                
-            }//VStack
-            
+                }
+            }//NavigationView
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarHidden(true)
+        
         }//ZStack
         .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
         .rotation3DEffect(.degrees(isOpen ? 30: 0), axis: (x: 0, y: -1, z: 0))

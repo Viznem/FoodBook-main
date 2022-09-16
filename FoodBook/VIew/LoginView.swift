@@ -51,24 +51,25 @@ class LoginViewModel: ObservableObject {
             DispatchQueue.main.async {
                 
                 let db = Firestore.firestore()
+
                 
                 self?.loginStatusMessage = "Successfully Create User!"
                 self?.loggedIn = true
                 self?.persistImageToStorage(image: image)
-                guard let uid = self?.auth.currentUser?.uid else {return}
+        
                 // Add a new document with a generated ID
-                var ref: DocumentReference? = nil
-                ref = db.collection("users").addDocument(data: [
-                    "uid": uid,
-                    "recipes": [],
-                    "favorites": []
-                ]) { err in
-                    if let err = err {
-                        print("Error adding document: \(err)")
-                    } else {
-                        print("Document added with ID: \(ref!.documentID)")
-                    }
-                }
+                //var ref: DocumentReference? = nil
+//                ref = db.collection("users").addDocument(data: [
+//                    "uid": uid,
+//                    "recipes": [],
+//                    "favorites": []
+//                ]) { err in
+//                    if let err = err {
+//                        print("Error adding document: \(err)")
+//                    } else {
+//                        print("Document added with ID: \(ref!.documentID)")
+//                    }
+//                }
                 
             }
             
@@ -77,6 +78,7 @@ class LoginViewModel: ObservableObject {
     
     func persistImageToStorage(image: UIImage) {
         guard let uid = auth.currentUser?.uid else {return}
+        
         let ref = storage.reference(withPath: uid)
         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             return
@@ -93,12 +95,29 @@ class LoginViewModel: ObservableObject {
                     return
                 }
                 self.loginStatusMessage = "Successfully stored image: \(url?.absoluteString ?? "")"
+
                 //Store user information to firestore
                 guard let url = url else {return}
                 self.storeUserInformation(imageProfileUrl: url)
             }
         }
+    }
+    
+    private func storeUserInformation(imageProfileUrl: URL) {
+        guard let uid = auth.currentUser?.uid else {return}
+        guard let email = auth.currentUser?.email else {return}
+        let db = Firestore.firestore()
         
+        let userData = ["email": email,"uid" : uid,"profileImageUrl": imageProfileUrl.absoluteString,"recipes": [],"favorites": []] as [String : Any]
+        
+        db.collection("users").document(uid).setData(userData) { err in
+            if let err = err {
+                print(err)
+                self.loginStatusMessage = "\(err)"
+                return
+            }
+            print("Success")
+        }
     }
     
     private func storeUserInformation(imageProfileUrl: URL) {
@@ -140,9 +159,12 @@ struct LoginView: View {
                 SignIn()
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(true)
         .onAppear{
             loginViewModel.loggedIn = loginViewModel.isLoggedIn
         }
+        
     }
 }
 
@@ -361,7 +383,6 @@ struct SignUp: View {
     }
 }
 
-
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         let loginViewModel = LoginViewModel()
@@ -371,7 +392,10 @@ struct LoginView_Previews: PreviewProvider {
     }
 }
 
+
+
 extension View {
+    
     func placeholder<Content: View>(
         when shouldShow: Bool,
         alignment: Alignment = .leading,

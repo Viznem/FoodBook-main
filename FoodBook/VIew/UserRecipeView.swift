@@ -1,8 +1,15 @@
+////
+////  UserRecipeView.swift
+////  FoodBook
+////
+////  Created by Thinh, Nguyen Truong on 09/09/2022.
+////
 //
-//  UserRecipeView.swift
-//  FoodBook
+//import SwiftUI
 //
-//  Created by Thinh, Nguyen Truong on 09/09/2022.
+//struct UserRecipeView: View {
+//    @Binding var isOpen: Bool
+//    @State private var showCRUDview = false
 //
 
 import SwiftUI
@@ -56,3 +63,10 @@ struct UserRecipeView: View {
     }
     
 }
+
+//struct UserRecipeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UserRecipeView(isOpen: .constant(false))
+//    }
+//}
+

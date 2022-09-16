@@ -41,6 +41,8 @@
 		678BAD2228CB45D600790C07 /* MessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678BAD2128CB45D600790C07 /* MessagesView.swift */; };
 		678BAD2A28CB48EA00790C07 /* UserRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678BAD2928CB48EA00790C07 /* UserRecipeView.swift */; };
 		9B0F5B4728D2E9F300341834 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0F5B4628D2E9F300341834 /* FoodViewModel.swift */; };
+		67AD186928D33F5000638D96 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AD186828D33F5000638D96 /* FirebaseManager.swift */; };
+		67AD186C28D347B400638D96 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 67AD186B28D347B400638D96 /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,7 @@
 		678BAD2128CB45D600790C07 /* MessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesView.swift; sourceTree = "<group>"; };
 		678BAD2928CB48EA00790C07 /* UserRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecipeView.swift; sourceTree = "<group>"; };
 		9B0F5B4628D2E9F300341834 /* FoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
+		67AD186828D33F5000638D96 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,7 @@
 				6720544B28C9BFBE00742232 /* FirebaseFirestoreSwift in Frameworks */,
 				6720544F28C9BFBE00742232 /* FirebaseStorageCombine-Community in Frameworks */,
 				6720544328C9BFBE00742232 /* FirebaseAuth in Frameworks */,
+				67AD186C28D347B400638D96 /* SDWebImageSwiftUI in Frameworks */,
 				6720544928C9BFBE00742232 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				6720544528C9BFBE00742232 /* FirebaseAuthCombine-Community in Frameworks */,
 				678BAD1928CB0D1E00790C07 /* RiveRuntime in Frameworks */,
@@ -132,6 +136,7 @@
 				3E29259C28D44E4C00C6C6FC /* Utils */,
 				677E345028C71ADE0079BE41 /* FoodBookApp.swift */,
 				677E345428C71ADF0079BE41 /* Assets.xcassets */,
+				67AD186728D33F1700638D96 /* Utils */,
 				3EE67D5928D04C390023EBC5 /* Model */,
 				677E346D28C7487A0079BE41 /* VIew */,
 				6720545028CA0C5C00742232 /* ImagePicker.swift */,
@@ -189,6 +194,14 @@
 			path = MenuView;
 			sourceTree = "<group>";
 		};
+		67AD186728D33F1700638D96 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				67AD186828D33F5000638D96 /* FirebaseManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -214,6 +227,7 @@
 				6720544C28C9BFBE00742232 /* FirebaseStorage */,
 				6720544E28C9BFBE00742232 /* FirebaseStorageCombine-Community */,
 				678BAD1828CB0D1E00790C07 /* RiveRuntime */,
+				67AD186B28D347B400638D96 /* SDWebImageSwiftUI */,
 			);
 			productName = FoodBook;
 			productReference = 677E344D28C71ADE0079BE41 /* FoodBook.app */;
@@ -246,6 +260,7 @@
 			packageReferences = (
 				6720544128C9BFBE00742232 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				678BAD1728CB0D1E00790C07 /* XCRemoteSwiftPackageReference "rive-ios" */,
+				67AD186A28D347B400638D96 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 677E344E28C71ADE0079BE41 /* Products */;
 			projectDirPath = "";
@@ -282,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EF57C1928D19F5D00BF16A5 /* User.swift in Sources */,
+				67AD186928D33F5000638D96 /* FirebaseManager.swift in Sources */,
 				678BAD0728CB0C0A00790C07 /* MenuView.swift in Sources */,
 				6720545128CA0C5C00742232 /* ImagePicker.swift in Sources */,
 				3EE67D5828D044EB0023EBC5 /* CRUDView.swift in Sources */,
@@ -515,6 +531,14 @@
 				kind = branch;
 			};
 		};
+		67AD186A28D347B400638D96 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -557,6 +581,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 678BAD1728CB0D1E00790C07 /* XCRemoteSwiftPackageReference "rive-ios" */;
 			productName = RiveRuntime;
+		};
+		67AD186B28D347B400638D96 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 67AD186A28D347B400638D96 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

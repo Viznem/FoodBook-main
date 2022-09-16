@@ -1,9 +1,3 @@
-//
-//  CRUDView.swift
-//  FoodBook
-//
-//  Created by An Pham Hoang Thien on 13/09/2022.
-//
 
 import SwiftUI
 import Foundation
@@ -127,4 +121,3 @@ struct CRUDView_Previews: PreviewProvider {
         CRUDView()
     }
 }
-
