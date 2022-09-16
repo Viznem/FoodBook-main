@@ -10,7 +10,7 @@ import Foundation
 
 struct Food: Identifiable{
     
-    var id: String
+    var id = UUID()
     var name: String
     var type: String
     var region: String

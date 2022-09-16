@@ -8,25 +8,33 @@
 import SwiftUI
 import Foundation
 import Firebase
+import FirebaseStorage
+import FirebaseCore
+import FirebaseFirestore
+
+class CRUDViewModel: ObservableObject{
+    let auth = Auth.auth()
+    let storage = Storage.storage()
+}
 
 struct CRUDView: View {
-    
+    @EnvironmentObject var CRUDViewModel: CRUDViewModel
+    @State private var showCRUDview = false
+
     @State var list = [Food]()
     
     func addFood(name: String, type: String, region: String, description: String){
+        let food = Food(name: name, type:type, region: region, description: description)
         let db = Firestore.firestore()
-        
-        db.collection("Food").addDocument(data: ["name": nameFieldText, "type": typeOfFoodSelection, "region": regionOfFoodSelection,"description": descriptionFieldText]){
-            error in
-            if error == nil{
-                self.getFood()
-            }
-            else{
-                
-            }
-        }
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
+        let foodRef = db.collection("users").document(uid).collection("foods")
+        foodRef.addDocument(data: [
+            "id": food.id.uuidString,
+            "name": food.name,
+            "type": food.type,
+            "region": food.region,
+            "description": food.description])
     }
-    
     func getFood(){
         let db = Firestore.firestore()
         
@@ -37,7 +45,7 @@ struct CRUDView: View {
                     DispatchQueue.main.async {
                         self.list = snapshot.documents.map{
                             d in
-                            return Food(id: d.documentID,
+                            return Food(
                                         name: d["name"] as? String ?? "",
                                         type: d["type"] as? String ?? "",
                                         region: d["region"]as? String ?? "",
@@ -51,12 +59,12 @@ struct CRUDView: View {
             }
         }
     }
-
+    
     @State var nameFieldText: String = ""
     @State var descriptionFieldText: String = ""
-    @State private var typeOfFoodSelection = ""
+    @State var typeOfFoodSelection = ""
     let type = ["Soup", "Salad", "Main Dish", "Breakfast", "Desserts"]
-    @State private var regionOfFoodSelection = " "
+    @State var regionOfFoodSelection = " "
     let region = ["Vietnamese", "Korean", "Indian", "Chinese", "Italian"]
     var body: some View {
         ZStack{
@@ -71,29 +79,29 @@ struct CRUDView: View {
                     .padding()
                 Spacer()
                 Group{
-                TextField("Food name: ", text: $nameFieldText)
-                    .padding()
-                    .background(Color.gray.opacity(0.2).cornerRadius(10))
-                    .foregroundColor(.blue)
-                
-                Picker("Select the type of the food: ", selection: $typeOfFoodSelection){
-                    ForEach(type, id: \.self){
-                        Text($0)
+                    TextField("Food name: ", text: $nameFieldText)
+                        .padding()
+                        .background(Color.gray.opacity(0.2).cornerRadius(10))
+                        .foregroundColor(.blue)
+                    
+                    Picker("Select the type of the food: ", selection: $typeOfFoodSelection){
+                        ForEach(type, id: \.self){
+                            Text($0)
+                        }
                     }
-                }
-                .pickerStyle(.menu)
-                
-                Picker("Select the region of the food: ", selection: $regionOfFoodSelection){
-                    ForEach(region, id: \.self){
-                        Text($0)
+                    .pickerStyle(.menu)
+                    
+                    Picker("Select the region of the food: ", selection: $regionOfFoodSelection){
+                        ForEach(region, id: \.self){
+                            Text($0)
+                        }
                     }
-                }
-                .pickerStyle(.menu)
-                
-                TextField("Food description: ", text: $descriptionFieldText)
-                    .padding()
-                    .background(Color.gray.opacity(0.2).cornerRadius(16))
-                    .foregroundColor(.blue)
+                    .pickerStyle(.menu)
+                    
+                    TextField("Food description: ", text: $descriptionFieldText)
+                        .padding()
+                        .background(Color.gray.opacity(0.2).cornerRadius(16))
+                        .foregroundColor(.blue)
                 }
                 .padding(10)
                 Spacer()
@@ -111,6 +119,8 @@ struct CRUDView: View {
         }
     }
 }
+
+
 
 struct CRUDView_Previews: PreviewProvider {
     static var previews: some View {

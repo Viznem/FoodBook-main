@@ -10,13 +10,16 @@ import Firebase
 import FirebaseStorage
 import FirebaseFirestore
 
+
 struct UserRecipeView: View {
     @ObservedObject var foods = FoodViewModel()
-    @Binding var isOpen: Bool
+    @Binding var isOpen : Bool
     @State private var showCRUDview = false
     
-    init(Food: Food) {
-        foods.getFood()
+    
+    init(isOpen: Binding<Bool>) {
+        _isOpen = isOpen
+        foods.getFood()        
     }
     
     var body: some View {
