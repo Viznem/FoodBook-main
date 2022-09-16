@@ -10,25 +10,34 @@ import SDWebImageSwiftUI
 
 class AddMessageViewModel: ObservableObject {
     
-    @Published var users = [User]()
-    @Published var errorMessage = ""
-    
-    init() {
-        fetchAllUsers()
-    }
-    
-    private func fetchAllUsers() {
-        FirebaseManager.shared.firestore.collection("users")
-            .getDocuments { snapshot, error in
-                if let error = error {
-                    self.errorMessage = "Failed to fetch users: \(error)"
-                    print("Failed to fetch users: \(error)")
-                    return
-                }
+    @Published var users = [ChatUser]()
+        @Published var errorMessage = ""
+
+        init() {
+            fetchAllUsers()
+        }
+
+        private func fetchAllUsers() {
+            FirebaseManager.shared.firestore.collection("users")
+                .getDocuments { documentsSnapshot, error in
+                    if let error = error {
+                        self.errorMessage = "Failed to fetch users: \(error)"
+                        print("Failed to fetch users: \(error)")
+                        return
+                    }
                 
-                self.errorMessage = "Fetched users successfully"
-            }
-    }
+                    documentsSnapshot?.documents.forEach({ snapshot in
+                        let data = snapshot.data()
+                   
+                        let user = ChatUser(data: data)
+                        
+                        if user.uid != FirebaseManager.shared.auth.currentUser?.uid {
+                            self.users.append(.init(data: data))
+                        }
+
+                    })
+                }
+        }
 }
 
 struct AddMessageView: View {
@@ -41,7 +50,7 @@ struct AddMessageView: View {
                ScrollView {
                    Text(vm.errorMessage)
                    
-                   ForEach(0..<10) { num in
+                   ForEach(vm.users) { num in
                        Text("New user")
                    }
                }.navigationTitle("New Message")

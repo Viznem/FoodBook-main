@@ -8,16 +8,25 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct User {
+struct ChatUser: Identifiable {
+    
+    var id: String {uid}
+    
     let uid, email, profileImageUrl: String
+    
+    init(data: [String: Any]) {
+        self.uid = data["uid"] as? String ?? ""
+        self.email = data["email"] as? String ?? ""
+        self.profileImageUrl = data["profileImageUrl"] as? String ?? ""
+    }
 }
 
 class MessagesViewModel: ObservableObject {
     
     @Published var errorMessage = ""
-    @Published var user: User?
+    @Published var user: ChatUser?
     
-    init() {
+    public init() {
         fetchCurrentUser()
     }
     
@@ -40,12 +49,8 @@ class MessagesViewModel: ObservableObject {
                     self.errorMessage = "No Data"
                     return
                 }
-                
-                let uid = data["uid"] as? String ?? ""
-                let email = data["email"] as? String ?? ""
-                let profileImageUrl = data["profileImageUrl"] as? String ?? ""
-                
-                self.user = User(uid: uid, email: email, profileImageUrl: profileImageUrl)
+    
+                self.user = ChatUser(data: data)
             }
     }
     
