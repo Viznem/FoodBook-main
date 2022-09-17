@@ -40,6 +40,8 @@ struct UserRecipeView: View {
                                 HStack{
                                 Text(food.name)
                                     Button(action: {
+                                        print(food.id)
+                                        
                                         foods.deleteFood(foodDelete: food)
                                         }, label: {
                                                 Image(systemName: "minus.circle")

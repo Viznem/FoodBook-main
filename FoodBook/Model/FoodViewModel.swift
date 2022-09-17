@@ -24,6 +24,7 @@ class FoodViewModel: ObservableObject {
                         self.foodList = snapshot.documents.map{
                             d in
                             return Food(
+                                id: d["id"] as? String ?? "",
                                         name: d["name"] as? String ?? "",
                                         type: d["type"] as? String ?? "",
                                         region: d["region"]as? String ?? "",
@@ -44,12 +45,12 @@ class FoodViewModel: ObservableObject {
             let db = Firestore.firestore()
             guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
             // Specify the document to delete
-        db.collection("users").document(uid).collection("foods").document(foodDelete.name).delete{ error in
+        db.collection("users").document(uid).collection("foods").document(foodDelete.id).delete{ error in
             
             // Check for errors
             if error == nil {
                 // No errors
-                
+                print(foodDelete.id)
                 // Update the UI from the main thread
                 DispatchQueue.main.async {
                     

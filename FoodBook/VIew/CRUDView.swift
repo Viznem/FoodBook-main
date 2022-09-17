@@ -18,40 +18,16 @@ struct CRUDView: View {
     @State var list = [Food]()
     
     func addFood(name: String, type: String, region: String, description: String){
-        let food = Food(name: name, type:type, region: region, description: description)
+        let food = Food(id: UUID().uuidString, name: name, type:type, region: region, description: description)
         let db = Firestore.firestore()
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
-        let foodRef = db.collection("users").document(uid).collection("foods")
-        foodRef.addDocument(data: [
-            "id": food.id.uuidString,
+        let foodRef = db.collection("users").document(uid).collection("foods").document(food.id)
+        foodRef.setData([
+            "id": food.id,
             "name": food.name,
             "type": food.type,
             "region": food.region,
             "description": food.description])
-    }
-    func getFood(){
-        let db = Firestore.firestore()
-        
-        db.collection("Food").getDocuments{
-            snapshot, error in
-            if error == nil{
-                if let snapshot = snapshot{
-                    DispatchQueue.main.async {
-                        self.list = snapshot.documents.map{
-                            d in
-                            return Food(
-                                        name: d["name"] as? String ?? "",
-                                        type: d["type"] as? String ?? "",
-                                        region: d["region"]as? String ?? "",
-                                        description: d["description"] as? String ?? "")
-                        }
-                    }
-                }
-                else{
-                    
-                }
-            }
-        }
     }
     
     @State var nameFieldText: String = ""
