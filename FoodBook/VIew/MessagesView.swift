@@ -80,11 +80,10 @@ struct MessagesView: View {
                         ChatView(chatUser: self.chatUser)
                     }
                     
+                    newMessageButton
                 }//VStack
                 
             }//NavigationView
-            .overlay(
-                newMessageButton, alignment: .bottom)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarHidden(true)
             .padding(.bottom, 30)
@@ -215,19 +214,6 @@ struct MessagesView: View {
         }
 }
 
-
-struct ChatView: View {
-    
-    let chatUser: ChatUser?
-    
-    var body: some View {
-        ScrollView{
-            ForEach(0..<10) { num in
-                Text("Sample messages")
-            }
-        }.navigationTitle(chatUser?.email ?? "")
-    }
-}
 
 struct MessagesView_Previews: PreviewProvider {
     static var previews: some View {
