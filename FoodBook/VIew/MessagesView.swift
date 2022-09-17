@@ -59,6 +59,8 @@ class MessagesViewModel: ObservableObject {
 struct MessagesView: View {
     @State var shouldShowLogOutOptions = false
     @State var showMessageScreen = false
+    @State var navigateToChatView = false
+    @State var chatUser: ChatUser?
     
     @EnvironmentObject var loginViewModel: LoginViewModel
     @ObservedObject var vm = MessagesViewModel()
@@ -70,39 +72,15 @@ struct MessagesView: View {
             
             NavigationView {
                 VStack(alignment: .leading){
-                    
                     customNavBar
-                   
-                    ScrollView {
-                        ForEach(0..<10, id: \.self) { num in
-                            VStack{
-                                HStack(spacing: 10){
-                                    Image(systemName: "person.fill")
-                                       .font(.system(size: 32))
-                                       .padding(8)
-                                       .overlay(RoundedRectangle(cornerRadius: 44)
-                                                   .stroke(Color(.label), lineWidth: 1)
-                                       )
-
-
-                                   VStack(alignment: .leading) {
-                                       Text("\(vm.user?.email ?? "")")
-                                           .font(.system(size: 16, weight: .bold))
-                                       Text("Message sent to user")
-                                           .font(.system(size: 14))
-                                           .foregroundColor(Color(.lightGray))
-                                   }
-                                   Spacer()
-
-                                   Text("22d")
-                                       .font(.system(size: 14, weight: .semibold))
-                                }
-                                Divider()
-                                    .padding(.vertical, 8)
-                            }.padding(.horizontal)                        }
-                    }.padding(.bottom, 50)
+                    
+                    messageList
+                    
+                    NavigationLink("", isActive: $navigateToChatView) {
+                        ChatView(chatUser: self.chatUser)
+                    }
+                    
                 }//VStack
-                
                 
             }//NavigationView
             .overlay(
@@ -138,9 +116,52 @@ struct MessagesView: View {
                    .shadow(radius: 15)
            }
            .fullScreenCover(isPresented: $showMessageScreen) {
-               AddMessageView()
+               AddMessageView(selectChatUser: { user in
+                   print(user.email)
+                   self.navigateToChatView.toggle()
+                   self.chatUser = user
+               })
            }
        }
+    
+    
+    private var messageList: some View {
+        ScrollView {
+            ForEach(0..<10, id: \.self) { num in
+                VStack{
+                    
+                    NavigationLink(destination: {
+                        Text("Destination")
+                    }, label: {
+                        HStack(spacing: 16){
+                            Image(systemName: "person.fill")
+                               .font(.system(size: 32))
+                               .padding(8)
+                               .overlay(RoundedRectangle(cornerRadius: 44)
+                                           .stroke(Color(.label), lineWidth: 1)
+                               )
+
+
+                           VStack(alignment: .leading) {
+                               Text("\(vm.user?.email ?? "")")
+                                   .font(.system(size: 16, weight: .bold))
+                               Text("Message sent to user")
+                                   .font(.system(size: 14))
+                                   .foregroundColor(Color(.lightGray))
+                           }
+                           Spacer()
+
+                           Text("22d")
+                               .font(.system(size: 14, weight: .semibold))
+                        }//HStack
+                            Divider().padding(.vertical, 8)
+                        }
+                    )
+                }//VStack
+                .padding(.horizontal)
+            }
+        }.padding(.bottom, 50)
+    }
     
     private var customNavBar: some View {
             HStack(spacing: 16) {
@@ -192,6 +213,20 @@ struct MessagesView: View {
                 ])
             }
         }
+}
+
+
+struct ChatView: View {
+    
+    let chatUser: ChatUser?
+    
+    var body: some View {
+        ScrollView{
+            ForEach(0..<10) { num in
+                Text("Sample messages")
+            }
+        }.navigationTitle(chatUser?.email ?? "")
+    }
 }
 
 struct MessagesView_Previews: PreviewProvider {
