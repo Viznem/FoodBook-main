@@ -6,13 +6,13 @@ import FirebaseStorage
 import FirebaseCore
 import FirebaseFirestore
 
-class CRUDViewModel: ObservableObject{
-    let auth = Auth.auth()
-    let storage = Storage.storage()
-}
+//class CRUDViewModel: ObservableObject{
+//    let auth = Auth.auth()
+//    let storage = Storage.storage()
+//}
 
 struct CRUDView: View {
-    @EnvironmentObject var CRUDViewModel: CRUDViewModel
+//    @EnvironmentObject var CRUDViewModel: CRUDViewModel
     @State private var showCRUDview = false
     
     @State var list = [Food]()
@@ -39,9 +39,9 @@ struct CRUDView: View {
     @State var nameFieldText: String = ""
     @State var descriptionFieldText: String = ""
     @State var typeOfFoodSelection = ""
-    let type = ["Soup", "Salad", "Main Dish", "Breakfast", "Desserts"]
-    @State var regionOfFoodSelection = " "
-    let region = ["Vietnamese", "Korean", "Indian", "Chinese", "Italian"]
+    let type = ["Soup", "Salad", "Main Dish", "Breakfast", "Desserts", "Others"]
+    @State var regionOfFoodSelection = ""
+    let region = ["Vietnamese", "Korean", "Indian", "Chinese", "Italian", "American","French", "Others"]
     var body: some View {
         ZStack{
             VStack{
@@ -79,7 +79,7 @@ struct CRUDView: View {
                         .background(Color.gray.opacity(0.2).cornerRadius(16))
                         .foregroundColor(.blue)
                     
-                    TextField("path to the picture: ", text: $urlPathFieldText)
+                    TextField("Path to the picture: ", text: $urlPathFieldText)
                         .padding()
                         .background(Color.gray.opacity(0.2).cornerRadius(16))
                         .foregroundColor(.blue)
