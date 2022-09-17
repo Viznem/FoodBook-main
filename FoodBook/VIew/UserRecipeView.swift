@@ -58,7 +58,7 @@ struct UserRecipeView: View {
                         Button{
                             showCRUDview.toggle()
                         }label: {
-                            Text("Add a new recipe")
+                            Image(systemName: "plus.circle")
                         }.sheet(isPresented: $showCRUDview){
                             CRUDView()
                         }

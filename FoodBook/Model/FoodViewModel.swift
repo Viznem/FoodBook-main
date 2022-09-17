@@ -25,10 +25,12 @@ class FoodViewModel: ObservableObject {
                             d in
                             return Food(
                                 id: d["id"] as? String ?? "",
-                                        name: d["name"] as? String ?? "",
-                                        type: d["type"] as? String ?? "",
-                                        region: d["region"]as? String ?? "",
-                                        description: d["description"] as? String ?? "")
+                                name: d["name"] as? String ?? "",
+                                type: d["type"] as? String ?? "",
+                                region: d["region"]as? String ?? "",
+                                description: d["description"] as? String ?? "",
+                                recipe: d["recipe"]as? String ?? "",
+                                urlPath: d["urlPath"]as? String ?? " ")
                         }
                     }
                 }

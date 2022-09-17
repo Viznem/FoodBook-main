@@ -17,8 +17,8 @@ struct CRUDView: View {
     
     @State var list = [Food]()
     
-    func addFood(name: String, type: String, region: String, description: String){
-        let food = Food(id: UUID().uuidString, name: name, type:type, region: region, description: description)
+    func addFood(name: String, type: String, region: String, description: String, recipe: String, urlPath: String){
+        let food = Food(id: UUID().uuidString, name: name, type:type, region: region, description: description, recipe: recipe, urlPath: urlPath)
         let db = Firestore.firestore()
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
         let foodRef = db.collection("users").document(uid).collection("foods").document(food.id)
@@ -27,9 +27,15 @@ struct CRUDView: View {
             "name": food.name,
             "type": food.type,
             "region": food.region,
-            "description": food.description])
+            "description": food.description,
+            "recipe": food.recipe,
+            "urlPath": food.urlPath])
+        
+        
     }
     
+    @State var recipeFieldText: String = ""
+    @State var urlPathFieldText: String = ""
     @State var nameFieldText: String = ""
     @State var descriptionFieldText: String = ""
     @State var typeOfFoodSelection = ""
@@ -38,11 +44,6 @@ struct CRUDView: View {
     let region = ["Vietnamese", "Korean", "Indian", "Chinese", "Italian"]
     var body: some View {
         ZStack{
-            Rectangle() //background color
-                .foregroundColor(.blue)
-                .opacity(0.55)
-                .ignoresSafeArea()
-            
             VStack{
                 Text("ADD YOUR OWN FOOD RECIPE!")
                     .fontWeight(.bold)
@@ -72,11 +73,21 @@ struct CRUDView: View {
                         .padding()
                         .background(Color.gray.opacity(0.2).cornerRadius(16))
                         .foregroundColor(.blue)
+                    
+                    TextField("Food recipe: ", text: $recipeFieldText)
+                        .padding()
+                        .background(Color.gray.opacity(0.2).cornerRadius(16))
+                        .foregroundColor(.blue)
+                    
+                    TextField("path to the picture: ", text: $urlPathFieldText)
+                        .padding()
+                        .background(Color.gray.opacity(0.2).cornerRadius(16))
+                        .foregroundColor(.blue)
                 }
                 .padding(10)
                 Spacer()
                 Button(action:{
-                    addFood(name: nameFieldText, type: typeOfFoodSelection, region: regionOfFoodSelection, description: descriptionFieldText)
+                    addFood(name: nameFieldText, type: typeOfFoodSelection, region: regionOfFoodSelection, description: descriptionFieldText, recipe: recipeFieldText, urlPath: urlPathFieldText)
                 }){
                     Text("Add food")
                         .bold()

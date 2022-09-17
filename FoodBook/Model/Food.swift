@@ -27,5 +27,8 @@ struct Food: Identifiable{
     var type: String
     var region: String
     var description: String
+    var recipe: String
+    
+    var urlPath: String
     
 }
