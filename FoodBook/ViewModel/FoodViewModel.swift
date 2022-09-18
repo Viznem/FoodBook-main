@@ -167,11 +167,11 @@ class FoodViewModel: ObservableObject {
                 }
             }
     }
-    func updateFood(foodUpdate: Food){
-        let db = Firestore.firestore()
-        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
-
-        db.collection("users").document(uid).collection("foods").document
-    }
+//    func updateFood(foodUpdate: Food){
+//        let db = Firestore.firestore()
+//        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
+//
+//        db.collection("users").document(uid).collection("foods").document
+//    }
 }
 
