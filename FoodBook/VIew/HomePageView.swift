@@ -62,7 +62,7 @@ struct HomePageView: View {
                                             .opacity(0.15))
                                     }
                                 }
-                                .padding()
+                                .padding(.vertical, 10)
                                 
                                 }
                             .background(
@@ -142,16 +142,22 @@ struct CardView: View {
             
             VStack(alignment: .leading, spacing: 10) {
                 Text(food.name)
-                    .font(.title)
+                    .font(.system(.title, design: .rounded))
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                 Text(food.type)
-                    .font(.system(size:14))
+                    .font(.system(size:14,design: .rounded))
                     .foregroundColor(.black.opacity(0.9))
                 HStack {
+                    HStack {
                     Text(food.region)
-                        .font(.title3.bold())
+                        .font(.system(.title3, design: .rounded))
                         .foregroundColor(.black)
+                    Image(food.region)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30, height: 40)
+                    }
                     Spacer()
                     Button( action: {
                         food.isLike.toggle()
