@@ -68,7 +68,7 @@ struct CRUDView: View {
                                 }
                             }
                             .pickerStyle(.menu)
-                            
+                        }
                         
                         TextField("Food description: ", text: $descriptionFieldText)
                             .padding()
@@ -90,6 +90,7 @@ struct CRUDView: View {
                     Spacer()
                     Button(action:{
                         foods.addFood(name: nameFieldText, type: typeOfFoodSelection, region: regionOfFoodSelection, description: descriptionFieldText, recipe: recipeFieldText, urlPath: urlPathFieldText)
+                        showCRUDview = false
                     }){
                         Text("Add food")
                             .bold()
@@ -102,12 +103,12 @@ struct CRUDView: View {
             }
         }
     }
-    }}
-
-
-
-struct CRUDView_Previews: PreviewProvider {
-    static var previews: some View {
-        CRUDView()
-    }
 }
+
+
+//
+//struct CRUDView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CRUDView(showCRUDview: constan t)
+//    }
+//}

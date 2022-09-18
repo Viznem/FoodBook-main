@@ -40,8 +40,10 @@ struct RecipeDetailView: View {
                     Group{
                         Text("Type: \(food.type)")
                             .fontWeight(.heavy)
-                        Text("Region of food: \(food.region)")
-                            .fontWeight(.heavy)
+                        Image(food.region)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 30, alignment: .center)
                     }
                     .font(.system(size:15))
                     
@@ -68,8 +70,7 @@ struct RecipeDetailView: View {
                 }
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarHidden(true)
+
     }
 }
 

@@ -10,17 +10,13 @@
 		0008D60428D715540005743C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 0008D60328D715540005743C /* Lottie */; };
 		0008D60828D71EFC0005743C /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0008D60728D71EFC0005743C /* LottieView.swift */; };
 		0008D60A28D71F820005743C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0008D60928D71F820005743C /* LoadingView.swift */; };
-		0008D60C28D7219A0005743C /* 4882-pizza.json in Resources */ = {isa = PBXBuildFile; fileRef = 0008D60B28D7219A0005743C /* 4882-pizza.json */; };
 		0008D60E28D7241D0005743C /* food-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0008D60D28D7241D0005743C /* food-animation.json */; };
 		3E1B55C228D5B831004C474C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3E1B55C128D5B831004C474C /* Kingfisher */; };
 		3EE67D5828D044EB0023EBC5 /* CRUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE67D5728D044EB0023EBC5 /* CRUDView.swift */; };
 		3EE67D5B28D04C690023EBC5 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE67D5A28D04C690023EBC5 /* Food.swift */; };
-
-		6715B0CB28D447DF00A49C52 /* AddMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6715B0CA28D447DF00A49C52 /* AddMessageView.swift */; };
-
 		3EF57C1928D19F5D00BF16A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF57C1828D19F5D00BF16A5 /* User.swift */; };
 		3EF57C1D28D1B26900BF16A5 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF57C1C28D1B26900BF16A5 /* RecipeDetailView.swift */; };
-
+		6715B0CB28D447DF00A49C52 /* AddMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6715B0CA28D447DF00A49C52 /* AddMessageView.swift */; };
 		6720544328C9BFBE00742232 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6720544228C9BFBE00742232 /* FirebaseAuth */; };
 		6720544528C9BFBE00742232 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 6720544428C9BFBE00742232 /* FirebaseAuthCombine-Community */; };
 		6720544728C9BFBE00742232 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6720544628C9BFBE00742232 /* FirebaseFirestore */; };
@@ -60,17 +56,13 @@
 /* Begin PBXFileReference section */
 		0008D60728D71EFC0005743C /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		0008D60928D71F820005743C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		0008D60B28D7219A0005743C /* 4882-pizza.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "4882-pizza.json"; sourceTree = "<group>"; };
 		0008D60D28D7241D0005743C /* food-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "food-animation.json"; sourceTree = "<group>"; };
 		3E29259D28D44E5F00C6C6FC /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		3EE67D5728D044EB0023EBC5 /* CRUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDView.swift; sourceTree = "<group>"; };
 		3EE67D5A28D04C690023EBC5 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
-
-		6715B0CA28D447DF00A49C52 /* AddMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMessageView.swift; sourceTree = "<group>"; };
-
 		3EF57C1828D19F5D00BF16A5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3EF57C1C28D1B26900BF16A5 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
-
+		6715B0CA28D447DF00A49C52 /* AddMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMessageView.swift; sourceTree = "<group>"; };
 		6720545028CA0C5C00742232 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		677E344D28C71ADE0079BE41 /* FoodBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		677E345028C71ADE0079BE41 /* FoodBookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodBookApp.swift; sourceTree = "<group>"; };
@@ -167,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				0008D60D28D7241D0005743C /* food-animation.json */,
-				0008D60B28D7219A0005743C /* 4882-pizza.json */,
 				9BCDB33528D63DFC00336551 /* ViewModel */,
 				3E29259C28D44E4C00C6C6FC /* Utils */,
 				677E345028C71ADE0079BE41 /* FoodBookApp.swift */,
@@ -245,7 +236,6 @@
 		9BCDB33528D63DFC00336551 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				9B0F5B4628D2E9F300341834 /* FoodViewModel.swift */,
 				9BCDB33628D63E0D00336551 /* HomePageViewModel.swift */,
 				9B0F5B4628D2E9F300341834 /* FoodViewModel.swift */,
 			);
@@ -332,7 +322,6 @@
 			files = (
 				678BAD1628CB0CA400790C07 /* icons.riv in Resources */,
 				678BAD1228CB0CA400790C07 /* check.riv in Resources */,
-				0008D60C28D7219A0005743C /* 4882-pizza.json in Resources */,
 				0008D60E28D7241D0005743C /* food-animation.json in Resources */,
 				678BAD1028CB0CA400790C07 /* house.riv in Resources */,
 				677E345828C71ADF0079BE41 /* Preview Assets.xcassets in Resources */,
