@@ -43,6 +43,8 @@
 		67AD186928D33F5000638D96 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AD186828D33F5000638D96 /* FirebaseManager.swift */; };
 		67AD186C28D347B400638D96 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 67AD186B28D347B400638D96 /* SDWebImageSwiftUI */; };
 		9B0F5B4728D2E9F300341834 /* FoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0F5B4628D2E9F300341834 /* FoodViewModel.swift */; };
+		9BCDB33728D63E0D00336551 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCDB33628D63E0D00336551 /* HomePageViewModel.swift */; };
+		9BCDB33928D6538F00336551 /* HeartLikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCDB33828D6538F00336551 /* HeartLikeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +76,8 @@
 		678BAD2928CB48EA00790C07 /* UserRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecipeView.swift; sourceTree = "<group>"; };
 		67AD186828D33F5000638D96 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		9B0F5B4628D2E9F300341834 /* FoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewModel.swift; sourceTree = "<group>"; };
+		9BCDB33628D63E0D00336551 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
+		9BCDB33828D6538F00336551 /* HeartLikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartLikeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +138,7 @@
 		677E344F28C71ADE0079BE41 /* FoodBook */ = {
 			isa = PBXGroup;
 			children = (
+				9BCDB33528D63DFC00336551 /* ViewModel */,
 				3E29259C28D44E4C00C6C6FC /* Utils */,
 				677E345028C71ADE0079BE41 /* FoodBookApp.swift */,
 				677E345428C71ADF0079BE41 /* Assets.xcassets */,
@@ -168,6 +173,7 @@
 				678BAD2928CB48EA00790C07 /* UserRecipeView.swift */,
 				3EE67D5728D044EB0023EBC5 /* CRUDView.swift */,
 				3EF57C1C28D1B26900BF16A5 /* RecipeDetailView.swift */,
+				9BCDB33828D6538F00336551 /* HeartLikeView.swift */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -201,6 +207,14 @@
 				67AD186828D33F5000638D96 /* FirebaseManager.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		9BCDB33528D63DFC00336551 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9BCDB33628D63E0D00336551 /* HomePageViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,6 +320,8 @@
 				3EE67D5828D044EB0023EBC5 /* CRUDView.swift in Sources */,
 				678BAD2228CB45D600790C07 /* MessagesView.swift in Sources */,
 				9B0F5B4728D2E9F300341834 /* FoodViewModel.swift in Sources */,
+				9BCDB33728D63E0D00336551 /* HomePageViewModel.swift in Sources */,
+				9BCDB33928D6538F00336551 /* HeartLikeView.swift in Sources */,
 				678BAD2A28CB48EA00790C07 /* UserRecipeView.swift in Sources */,
 				3EE67D5B28D04C690023EBC5 /* Food.swift in Sources */,
 				3EF57C1D28D1B26900BF16A5 /* RecipeDetailView.swift in Sources */,

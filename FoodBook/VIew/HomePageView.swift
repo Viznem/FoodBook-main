@@ -6,32 +6,52 @@
 //
 
 import SwiftUI
+import Kingfisher
+import FirebaseCore
+import FirebaseFirestore
 
 struct HomePageView: View {
     @Binding var isOpen: Bool
     @EnvironmentObject var loginViewModel: LoginViewModel
+    @EnvironmentObject var homePageModel: HomePageViewModel
+    @ObservedObject var foods = FoodViewModel()
+    @State var selectedFood = Food(id: "", name: "", type: "", region: "", description: "", recipe: "", isLike: false, urlPath: "")
+    @State var isLinkActive = false
     
+    init(isOpen: Binding<Bool>) {
+        _isOpen = isOpen
+        foods.getFood()
+    }
     var body: some View {
         
         ZStack{
             Color(.white).ignoresSafeArea()
-            
             NavigationView{
-                VStack{
                     ScrollView{
-                        HStack{
+                        VStack {
+                            FilterGroup().padding(.horizontal, 10)
+                            ForEach(foods.foodList){
+                                food in
+                                HStack {
+                                    CardView(food: food)
+                                    Button {
+                                        selectedFood = food
+                                        isLinkActive = true
+                                    } label: {
+                                        Image(systemName: "arrow.forward")
+                                            .font(.title2)
+                                            .foregroundColor(food.isLike ? .red : .gray)
+                                    }
+                                }
+                                .padding()
+                                
+                                }
+                            .background(
+                                NavigationLink(
+                                    destination: RecipeDetailView(food: selectedFood), isActive: $isLinkActive) {
+                                    EmptyView()
+                                })
                             
-                            Text("You are signed in")
-                            
-                            Button {
-                                loginViewModel.signOut()
-                            } label: {
-                                Text("Sign Out")
-                                    .frame(width: 80, height: 50)
-                                    .background(Color.green)
-                                    .foregroundColor(Color.blue)
-                            }
-                        }//HStack
                     }
                 }
             }//NavigationView
@@ -48,8 +68,106 @@ struct HomePageView: View {
     }
 }
 
+var tabs = ["All", "Vietnamese", "Korean", "Indian", "American", "Others"]
+
+struct FilterButton: View {
+    var name: String
+    @Binding var isSelected: String
+    var animation: Namespace.ID
+    var body: some View {
+        Button(action: {
+            withAnimation(.spring(), {
+                isSelected = name
+            })
+        }) {
+        Text(name)
+            .fontWeight(.semibold)
+            .foregroundColor(isSelected == name ? .white : .black)
+            .padding()
+            .padding(.horizontal)
+            .background(ZStack {
+                if(isSelected == name) {Color(.red)
+                    .cornerRadius(12)
+                    .matchedGeometryEffect(id: "Tab", in: animation)
+                }
+            })
+            .shadow(color: Color.black.opacity(0.16), radius: 16, x: 4, y: 4)
+        }
+    }
+}
+
+struct CardView: View {
+    @State var food: Food
+    @ObservedObject var foods = FoodViewModel()
+
+    var body: some View {
+        HStack(spacing: 12) {
+            KFImage(URL(string: food.urlPath)!)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 120)
+                .padding()
+                .background(ZStack {
+                    RoundedRectangle(cornerRadius: 20, style: .continuous).fill(Color("Black").opacity(0.15))
+                })
+            
+            
+            VStack(alignment: .leading, spacing: 10) {
+                Text(food.name)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                Text(food.type)
+                    .font(.system(size:14))
+                    .foregroundColor(.black.opacity(0.9))
+                HStack {
+                    Text(food.region)
+                        .font(.title3.bold())
+                        .foregroundColor(.black)
+                    Spacer()
+                    Button( action: {
+                        food.isLike.toggle()
+                        //save this food to collection
+                        foods.addToFavoriteCollection(food: food)
+                        print("SAVE!!")
+                        
+                    }, label: {
+                        Image(systemName: food.isLike ? "suit.heart.fill" : "suit.heart")
+                            .font(.title2)
+                            .foregroundColor(food.isLike ? .red : .gray)
+                    })
+            }
+            
+            }
+        }
+        .overlay(
+            HeartLikeView(isLiked: $food.isLike, food: food, taps: 2))
+        .background{
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+            .fill(.white)}
+        .padding(.bottom, 6)
+    }
+}
+
+struct FilterGroup: View {
+    @State var isSelected = tabs[0]
+    @Namespace var animation
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 2) {
+                ForEach(tabs, id: \.self) { nation in
+                    FilterButton(name: nation, isSelected: $isSelected, animation: animation)
+                       
+                }
+            }
+            .padding(.vertical)
+        }
+    }
+    
+}
+
 struct HomePageView_Previews: PreviewProvider {
     static var previews: some View {
-        HomePageView(isOpen: .constant(false))
+        HomePageView(isOpen: .constant(false)).environmentObject(HomePageViewModel())
     }
 }

@@ -30,6 +30,7 @@ class FoodViewModel: ObservableObject {
                                 region: d["region"]as? String ?? "",
                                 description: d["description"] as? String ?? "",
                                 recipe: d["recipe"]as? String ?? "",
+                                isLike: d["isLike"]as? Bool ?? false,
                                 urlPath: d["urlPath"]as? String ?? " ")
                         }
                     }
@@ -40,6 +41,62 @@ class FoodViewModel: ObservableObject {
             }
         }
     }
+    
+    func getAllFood(){
+        let db = Firestore.firestore()
+        db.collection("food").getDocuments{
+            snapshot, error in
+            if error == nil{
+                if let snapshot = snapshot{
+                    DispatchQueue.main.async {
+                        self.foodList = snapshot.documents.map{
+                            d in
+                            return Food(
+                                id: d["id"] as? String ?? "",
+                                name: d["name"] as? String ?? "",
+                                type: d["type"] as? String ?? "",
+                                region: d["region"]as? String ?? "",
+                                description: d["description"] as? String ?? "",
+                                recipe: d["recipe"]as? String ?? "",
+                                isLike: d["isLike"]as? Bool ?? false,
+                                urlPath: d["urlPath"]as? String ?? " ")
+                        }
+                    }
+                }
+                else{
+                    
+                }
+            }
+        }
+    }
+    
+    func addToFavoriteCollection(food: Food) {
+        let db = Firestore.firestore()
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
+        let foodRef = db.collection("users").document(uid).collection("favorite-foods").document(food.id)
+        foodRef.setData([
+            "id": food.id,
+            "name": food.name,
+            "type": food.type,
+            "region": food.region,
+            "description": food.description,
+            "recipe": food.recipe,
+            "urlPath": food.urlPath])
+    }
+    
+    func removeFromFavoriteCollection(food: Food) {
+        let db = Firestore.firestore()
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
+        // Specify the document to delete
+        db.collection("users").document(uid).collection("favorite-foods").document(food.id).delete{ error in
+            if error == nil {
+                print("Remove suscessfully!")
+            } else {
+                print("Error removing favorite food")
+            }
+        }
+    }
+    
     
     func deleteFood(foodDelete: Food) {
 
@@ -52,7 +109,6 @@ class FoodViewModel: ObservableObject {
             // Check for errors
             if error == nil {
                 // No errors
-                print(foodDelete.id)
                 // Update the UI from the main thread
                 DispatchQueue.main.async {
                     
@@ -63,8 +119,6 @@ class FoodViewModel: ObservableObject {
                         
                     }
                 }
-                
-                
             }
         }
         
