@@ -31,9 +31,9 @@ struct CRUDView: View {
     @State var urlPathFieldText: String = ""
     @State var nameFieldText: String = ""
     @State var descriptionFieldText: String = ""
-    @State var typeOfFoodSelection = "Others"
+    @State var typeOfFoodSelection = "Soups"
     let type = ["Soup", "Salad", "Main Dish", "Breakfast", "Desserts", "Others"]
-    @State var regionOfFoodSelection = "Others"
+    @State var regionOfFoodSelection = "Vietnamese"
     let region = ["Vietnamese", "Korean", "Indian", "Chinese", "Italian", "American",  "Mexican", "Others"]
     var body: some View {
         ZStack{
@@ -50,20 +50,25 @@ struct CRUDView: View {
                             .padding()
                             .background(Color.gray.opacity(0.2).cornerRadius(10))
                             .foregroundColor(.blue)
+                    
+                        HStack{
                         
-                        Picker("Select the type of the food: ", selection: $typeOfFoodSelection){
-                            ForEach(type, id: \.self){
-                                Text($0)
+                            Text("Type of food: ")
+                            Picker("Select the type of the food: ", selection: $typeOfFoodSelection){
+                                ForEach(type, id: \.self){
+                                    Text($0)
+                                }
                             }
-                        }
-                        .pickerStyle(.menu)
+                            .pickerStyle(.menu)
                         
-                        Picker("Select the region of the food: ", selection: $regionOfFoodSelection){
-                            ForEach(region, id: \.self){
-                                Text($0)
+                            Text("Nation: ")
+                            Picker("Select the region of the food: ", selection: $regionOfFoodSelection){
+                                ForEach(region, id: \.self){
+                                    Text($0)
+                                }
                             }
-                        }
-                        .pickerStyle(.menu)
+                            .pickerStyle(.menu)
+                            
                         
                         TextField("Food description: ", text: $descriptionFieldText)
                             .padding()
@@ -97,7 +102,7 @@ struct CRUDView: View {
             }
         }
     }
-}
+    }}
 
 
 

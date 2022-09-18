@@ -30,6 +30,7 @@ class FoodViewModel: ObservableObject {
                     DispatchQueue.main.async {
                         self.foodList = snapshot.documents.map{
                             d in
+                            //retrieve the info of the food
                             return Food(
                                 id: d["id"] as? String ?? "",
                                 name: d["name"] as? String ?? "",
@@ -50,6 +51,7 @@ class FoodViewModel: ObservableObject {
     }
     
     func getAllFood(){
+        // call the database object to access firestore
         let db = Firestore.firestore()
         db.collection("Food").getDocuments{
             snapshot, error in
@@ -162,9 +164,12 @@ class FoodViewModel: ObservableObject {
     }
     
     func addFood(name: String, type: String, region: String, description: String, recipe: String, urlPath: String){
+        //create a food variable to add to the list later
         let food = Food(id: UUID().uuidString, name: name, type:type, region: region, description: description, recipe: recipe, isLike: false, urlPath: urlPath)
         let db = Firestore.firestore()
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
+        
+        //add a food document into the collection Food in firebase
         let mainfoodRef = db.collection("Food").document(food.id)
         mainfoodRef.setData([
             "id": food.id,
@@ -175,7 +180,7 @@ class FoodViewModel: ObservableObject {
             "description": food.description,
             "recipe": food.recipe,
             "urlPath": food.urlPath])
-    
+        //add another food document into the user's private food collection
         let foodRef = db.collection("users").document(uid).collection("foods").document(food.id)
         foodRef.setData([
             "id": food.id,
@@ -193,7 +198,7 @@ class FoodViewModel: ObservableObject {
             let db = Firestore.firestore()
             guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
             // Specify the document to delete
-        db.collection("users").document(uid).collection("foods").document(foodDelete.id).delete{ error in            
+            db.collection("users").document(uid).collection("foods").document(foodDelete.id).delete{ error in
             // Check for errors
             if error == nil {
                 // No errors
@@ -209,7 +214,7 @@ class FoodViewModel: ObservableObject {
                 }
             }
         }
-    }
+            //delete the food that is stored in the Food collection
             db.collection("Food").document(foodDelete.id).delete{
                 error in
                 
