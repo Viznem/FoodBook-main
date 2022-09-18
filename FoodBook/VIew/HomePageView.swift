@@ -12,20 +12,30 @@ import FirebaseFirestore
 
 struct HomePageView: View {
     @Binding var isOpen: Bool
+    @Environment(\.colorScheme) var colorScheme
+
     @EnvironmentObject var loginViewModel: LoginViewModel
     @EnvironmentObject var homePageModel: HomePageViewModel
     @ObservedObject var foods = FoodViewModel()
     @State var selectedFood = Food(id: "", name: "", type: "", region: "", description: "", recipe: "", isLike: false, urlPath: "")
     @State var isLinkActive = false
-    
+//    @State var searchingWord = ""
+//
+//    var results: [Food] {
+//        if searchingWord.isEmpty {
+//            return foods.foodList
+//        } else {
+//            return foods.foodList.filter{$0.name.contains(searchingWord)}
+//        }
+//    }
     init(isOpen: Binding<Bool>) {
         _isOpen = isOpen
-        foods.getFood()
+        foods.getAllFood()
     }
     var body: some View {
         
         ZStack{
-            Color(.white).ignoresSafeArea()
+            Color(.black).opacity(0.2).ignoresSafeArea()
             NavigationView{
                     ScrollView{
                         VStack {
@@ -40,7 +50,11 @@ struct HomePageView: View {
                                     } label: {
                                         Image(systemName: "arrow.forward")
                                             .font(.title2)
-                                            .foregroundColor(food.isLike ? .red : .gray)
+                                            .foregroundColor(.white)
+                                    }
+                                    .background {
+                                        Circle().fill(.black
+                                            .opacity(0.15))
                                     }
                                 }
                                 .padding()
@@ -54,6 +68,8 @@ struct HomePageView: View {
                             
                     }
                 }
+//                    .searchable(text: $searchingWord)
+
             }//NavigationView
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarHidden(true)
@@ -68,21 +84,29 @@ struct HomePageView: View {
     }
 }
 
-var tabs = ["All", "Vietnamese", "Korean", "Indian", "American", "Others"]
+var tabs = ["All", "Vietnamese", "Korean", "Mexican", "American", "Others"]
 
 struct FilterButton: View {
+    @Environment(\.colorScheme) var colorScheme
     var name: String
+    @ObservedObject var foods = FoodViewModel()
     @Binding var isSelected: String
     var animation: Namespace.ID
     var body: some View {
         Button(action: {
             withAnimation(.spring(), {
                 isSelected = name
+                foods.queryFoodByNation(nation: name)
+                print(foods.foodList.count)
+        
+                //query by nation
+                
             })
+          
         }) {
         Text(name)
             .fontWeight(.semibold)
-            .foregroundColor(isSelected == name ? .white : .black)
+            .foregroundColor(isSelected == name || colorScheme == .dark  ? .white : .black)
             .padding()
             .padding(.horizontal)
             .background(ZStack {
@@ -104,12 +128,11 @@ struct CardView: View {
         HStack(spacing: 12) {
             KFImage(URL(string: food.urlPath)!)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 120)
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 120, height: 120)
+                .cornerRadius(20)
                 .padding()
-                .background(ZStack {
-                    RoundedRectangle(cornerRadius: 20, style: .continuous).fill(Color("Black").opacity(0.15))
-                })
+                
             
             
             VStack(alignment: .leading, spacing: 10) {
@@ -136,16 +159,23 @@ struct CardView: View {
                             .font(.title2)
                             .foregroundColor(food.isLike ? .red : .gray)
                     })
+                    .offset(x: -20,y: 0)
             }
             
             }
         }
+        .background(ZStack {
+            RoundedRectangle(cornerRadius: 20, style: .continuous).fill(.black
+                .opacity(0.15))
+        })
         .overlay(
             HeartLikeView(isLiked: $food.isLike, food: food, taps: 2))
         .background{
             RoundedRectangle(cornerRadius: 20, style: .continuous)
             .fill(.white)}
         .padding(.bottom, 6)
+        .frame(height: 140)
+        .shadow(color: .black.opacity(0.14), radius: 5, x: 5, y: 5)
     }
 }
 
