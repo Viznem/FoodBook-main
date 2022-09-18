@@ -1,9 +1,14 @@
-//
-//  RecipeDetailView.swift
-//  FoodBook
-//
-//  Created by An Pham Hoang Thien on 14/09/2022.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 3
+  Author: Pham Hoang Thien An, Nguyen Manh Khang, Nguyen Truong Thinh, Nguyen Dang Quang
+  ID: s3818286, s3871126, s3777230, s3741190
+  Created  date: 1/09/2022
+  Last modified: 18/09/2022
+  Acknowledgement: Acknowledge the resources that you use here.
+*/
 
 import SwiftUI
 import Foundation
@@ -22,7 +27,8 @@ struct RecipeDetailView: View {
                 VStack {
                     KFImage(URL(string: food.urlPath)!)
                         .resizable()
-                        .frame(width: 450, height: 250, alignment: .center)
+                        .frame(width: 400, height: 350, alignment: .center)
+                        .cornerRadius(20)
                     Spacer()
                     
                     Text(food.name)
@@ -41,11 +47,22 @@ struct RecipeDetailView: View {
                     
                     
                     Group{
-                        Text("DESCRIPTION: \(food.description)")
+                        Text("DESCRIPTION:")
+                            .bold()
+                            .padding(.all, 20)
+                            .background(.blue)
+                            .cornerRadius(20)
+                        Text(food.description)
+                            .padding(40)
+                        Text("RECIPE:")
+                            .bold()
+                            .padding(.all, 20)
+                            .background(.blue)
+                            .cornerRadius(20)
+                        Text(food.recipe)
+                            .padding(40)
                             
-                        Text("RECIPE: \(food.recipe)")
-                            
-                        }.padding(10)
+                        }
                         .font(.system(size:15))
                         
                 }
