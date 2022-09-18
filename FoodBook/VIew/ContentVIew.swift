@@ -30,7 +30,7 @@ struct ContentVIew: View {
             case "Favorites":
                FavoritesView(isOpen: $isOpen)
             case "User Recipes":
-               FavoritesView(isOpen: $isOpen)
+                UserRecipeView(isOpen: $isOpen)
             case "Messages":
                MessagesView(isOpen: $isOpen)
             default:

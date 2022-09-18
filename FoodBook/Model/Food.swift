@@ -17,3 +17,15 @@
 //
 //}
 //
+import SwiftUI
+import Foundation
+
+struct Food: Identifiable{
+    
+    var id = UUID()
+    var name: String
+    var type: String
+    var region: String
+    var description: String
+    
+}

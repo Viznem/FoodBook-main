@@ -9,6 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 import Firebase
 
+
 struct RecentMessage: Identifiable {
     
     var id: String { documentId }
@@ -33,7 +34,7 @@ struct RecentMessage: Identifiable {
 struct ChatUser: Identifiable {
     
     var id: String {uid}
-    
+
     let uid, email, profileImageUrl: String
     
     init(data: [String: Any]) {
@@ -112,6 +113,7 @@ class MessagesViewModel: ObservableObject {
                     self.errorMessage = "No Data"
                     return
                 }
+
                 FirebaseManager.shared.currentUser = ChatUser(data: data)
     
                 self.user = ChatUser(data: data)
