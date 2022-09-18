@@ -11,22 +11,8 @@
 */
 
 import SwiftUI
-import Firebase
 
-
-@main
-struct FoodBookApp: App {
- 
-    
-    init() {
-        FirebaseApp.configure()
-    }
-
-    var body: some Scene {
-        WindowGroup {
-            let loginViewModel = LoginViewModel()
-            LoginView()
-                .environmentObject(loginViewModel)
-        }
-    }
+class HomePageViewModel: ObservableObject{
+    @Published var currentFilter: String = "All"
 }
+

@@ -1,9 +1,14 @@
-//
-//  LoginView.swift
-//  FoodBook
-//
-//  Created by Thinh, Nguyen Truong on 06/09/2022.
-//
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2022B
+  Assessment: Assignment 3
+  Author: Pham Hoang Thien An, Nguyen Manh Khang, Nguyen Truong Thinh, Nguyen Dang Quang
+  ID: s3818286, s3871126, s3777230, s3741190
+  Created  date: 1/09/2022
+  Last modified: 18/09/2022
+  Acknowledgement: Acknowledge the resources that you use here.
+*/
 
 import SwiftUI
 import Firebase
@@ -54,19 +59,6 @@ class LoginViewModel: ObservableObject {
                 self?.loggedIn = true
                 self?.persistImageToStorage(image: image)
         
-                // Add a new document with a generated ID
-                //var ref: DocumentReference? = nil
-//                ref = db.collection("users").addDocument(data: [
-//                    "uid": uid,
-//                    "recipes": [],
-//                    "favorites": []
-//                ]) { err in
-//                    if let err = err {
-//                        print("Error adding document: \(err)")
-//                    } else {
-//                        print("Document added with ID: \(ref!.documentID)")
-//                    }
-//                }
                 
             }
             
@@ -134,7 +126,7 @@ struct LoginView: View {
         
         NavigationView{
             if loginViewModel.isLoggedIn {
-                ContentVIew()
+                LoadingView()
             }
             else {
                 SignIn()
