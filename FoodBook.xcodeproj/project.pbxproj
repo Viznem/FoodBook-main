@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0008D60128D714090005743C /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 0008D60028D714080005743C /* splash.json */; };
+		0008D60428D715540005743C /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 0008D60328D715540005743C /* Lottie */; };
 		3E1B55C228D5B831004C474C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3E1B55C128D5B831004C474C /* Kingfisher */; };
 		3EE67D5828D044EB0023EBC5 /* CRUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE67D5728D044EB0023EBC5 /* CRUDView.swift */; };
 		3EE67D5B28D04C690023EBC5 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE67D5A28D04C690023EBC5 /* Food.swift */; };
@@ -48,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0008D60028D714080005743C /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		3E29259D28D44E5F00C6C6FC /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		3EE67D5728D044EB0023EBC5 /* CRUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDView.swift; sourceTree = "<group>"; };
 		3EE67D5A28D04C690023EBC5 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
@@ -91,6 +94,7 @@
 				67AD186C28D347B400638D96 /* SDWebImageSwiftUI in Frameworks */,
 				3E1B55C228D5B831004C474C /* Kingfisher in Frameworks */,
 				6720544928C9BFBE00742232 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				0008D60428D715540005743C /* Lottie in Frameworks */,
 				6720544528C9BFBE00742232 /* FirebaseAuthCombine-Community in Frameworks */,
 				678BAD1928CB0D1E00790C07 /* RiveRuntime in Frameworks */,
 				6720544728C9BFBE00742232 /* FirebaseFirestore in Frameworks */,
@@ -137,6 +141,7 @@
 		677E344F28C71ADE0079BE41 /* FoodBook */ = {
 			isa = PBXGroup;
 			children = (
+				0008D60028D714080005743C /* splash.json */,
 				9BCDB33528D63DFC00336551 /* ViewModel */,
 				3E29259C28D44E4C00C6C6FC /* Utils */,
 				677E345028C71ADE0079BE41 /* FoodBookApp.swift */,
@@ -211,6 +216,7 @@
 		9BCDB33528D63DFC00336551 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				9B0F5B4628D2E9F300341834 /* FoodViewModel.swift */,
 				9BCDB33628D63E0D00336551 /* HomePageViewModel.swift */,
 				9B0F5B4628D2E9F300341834 /* FoodViewModel.swift */,
 			);
@@ -244,6 +250,7 @@
 				678BAD1828CB0D1E00790C07 /* RiveRuntime */,
 				67AD186B28D347B400638D96 /* SDWebImageSwiftUI */,
 				3E1B55C128D5B831004C474C /* Kingfisher */,
+				0008D60328D715540005743C /* Lottie */,
 			);
 			productName = FoodBook;
 			productReference = 677E344D28C71ADE0079BE41 /* FoodBook.app */;
@@ -278,6 +285,7 @@
 				678BAD1728CB0D1E00790C07 /* XCRemoteSwiftPackageReference "rive-ios" */,
 				67AD186A28D347B400638D96 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				3E1B55C028D5B831004C474C /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				0008D60228D715540005743C /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 677E344E28C71ADE0079BE41 /* Products */;
 			projectDirPath = "";
@@ -302,6 +310,7 @@
 				677E346928C746560079BE41 /* GoogleService-Info.plist in Resources */,
 				678BAD1428CB0CA400790C07 /* shapes.riv in Resources */,
 				678BAD1328CB0CA400790C07 /* menu_button.riv in Resources */,
+				0008D60128D714090005743C /* splash.json in Resources */,
 				678BAD1128CB0CA400790C07 /* confetti.riv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,6 +542,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0008D60228D715540005743C /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		3E1B55C028D5B831004C474C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -568,6 +585,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0008D60328D715540005743C /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0008D60228D715540005743C /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		3E1B55C128D5B831004C474C /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3E1B55C028D5B831004C474C /* XCRemoteSwiftPackageReference "Kingfisher" */;

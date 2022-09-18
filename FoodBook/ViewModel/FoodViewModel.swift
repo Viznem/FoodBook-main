@@ -1,3 +1,4 @@
+
 /*
   RMIT University Vietnam
   Course: COSC2659 iOS Development
@@ -22,7 +23,8 @@ class FoodViewModel: ObservableObject {
         let db = Firestore.firestore()
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
         db.collection("users").document(uid).collection("foods").getDocuments{
-            snapshot, error in
+            (snapshot, error) in
+
             if error == nil{
                 if let snapshot = snapshot{
                     DispatchQueue.main.async {
@@ -49,7 +51,7 @@ class FoodViewModel: ObservableObject {
     
     func getAllFood(){
         let db = Firestore.firestore()
-        db.collection("food").getDocuments{
+        db.collection("Food").getDocuments{
             snapshot, error in
             if error == nil{
                 if let snapshot = snapshot{
@@ -75,6 +77,36 @@ class FoodViewModel: ObservableObject {
         }
     }
     
+    func getFavoriteFood() {
+        let db = Firestore.firestore()
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
+        db.collection("users").document(uid).collection("favorite-foods").getDocuments{
+            (snapshot, error) in
+            if error == nil{
+                if let snapshot = snapshot{
+                    DispatchQueue.main.async {
+                        self.foodList = snapshot.documents.map{
+                            d in
+                            return Food(
+                                id: d["id"] as? String ?? "",
+                                name: d["name"] as? String ?? "",
+                                type: d["type"] as? String ?? "",
+                                region: d["region"]as? String ?? "",
+                                description: d["description"] as? String ?? "",
+                                recipe: d["recipe"]as? String ?? "",
+                                isLike: d["isLike"]as? Bool ?? false,
+                                urlPath: d["urlPath"]as? String ?? " ")
+                        }
+                    }
+                }
+                else{
+                    
+                }
+            }
+        }
+        
+    }
+    
     func addToFavoriteCollection(food: Food) {
         let db = Firestore.firestore()
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
@@ -84,6 +116,7 @@ class FoodViewModel: ObservableObject {
             "name": food.name,
             "type": food.type,
             "region": food.region,
+            "isLike": true,
             "description": food.description,
             "recipe": food.recipe,
             "urlPath": food.urlPath])
@@ -101,6 +134,33 @@ class FoodViewModel: ObservableObject {
             }
         }
     }
+    
+    func queryFoodByNation(nation: String) {
+        let db = Firestore.firestore()
+        // Specify the document to delete
+        db.collection("Food").whereField("region", isEqualTo: nation)
+            .getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                                DispatchQueue.main.async {
+                                self.foodList = querySnapshot!.documents.map{
+                                    d in
+                                    return Food(
+                                        id: d["id"] as? String ?? "",
+                                        name: d["name"] as? String ?? "",
+                                        type: d["type"] as? String ?? "",
+                                        region: d["region"]as? String ?? "",
+                                        description: d["description"] as? String ?? "",
+                                        recipe: d["recipe"]as? String ?? "",
+                                        isLike: d["isLike"]as? Bool ?? false,
+                                        urlPath: d["urlPath"]as? String ?? " ")
+                            }
+                        }
+                    }
+            }
+    }
+    
     func addFood(name: String, type: String, region: String, description: String, recipe: String, urlPath: String){
         let food = Food(id: UUID().uuidString, name: name, type:type, region: region, description: description, recipe: recipe, isLike: false, urlPath: urlPath)
         let db = Firestore.firestore()
@@ -133,8 +193,7 @@ class FoodViewModel: ObservableObject {
             let db = Firestore.firestore()
             guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
             // Specify the document to delete
-            db.collection("users").document(uid).collection("foods").document(foodDelete.id).delete{ error in
-            
+        db.collection("users").document(uid).collection("foods").document(foodDelete.id).delete{ error in            
             // Check for errors
             if error == nil {
                 // No errors
@@ -150,6 +209,7 @@ class FoodViewModel: ObservableObject {
                 }
             }
         }
+    }
             db.collection("Food").document(foodDelete.id).delete{
                 error in
                 
