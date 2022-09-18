@@ -114,7 +114,6 @@
 			children = (
 				3EE67D5A28D04C690023EBC5 /* Food.swift */,
 				3EF57C1828D19F5D00BF16A5 /* User.swift */,
-				9B0F5B4628D2E9F300341834 /* FoodViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				9BCDB33628D63E0D00336551 /* HomePageViewModel.swift */,
+				9B0F5B4628D2E9F300341834 /* FoodViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

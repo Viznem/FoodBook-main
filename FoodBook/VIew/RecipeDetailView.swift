@@ -22,7 +22,8 @@ struct RecipeDetailView: View {
                 VStack {
                     KFImage(URL(string: food.urlPath)!)
                         .resizable()
-                        .frame(width: 450, height: 250, alignment: .center)
+                        .frame(width: 400, height: 350, alignment: .center)
+                        .cornerRadius(20)
                     Spacer()
                     
                     Text(food.name)
@@ -41,11 +42,22 @@ struct RecipeDetailView: View {
                     
                     
                     Group{
-                        Text("DESCRIPTION: \(food.description)")
+                        Text("DESCRIPTION:")
+                            .bold()
+                            .padding(.all, 20)
+                            .background(.blue)
+                            .cornerRadius(20)
+                        Text(food.description)
+                            .padding(40)
+                        Text("RECIPE:")
+                            .bold()
+                            .padding(.all, 20)
+                            .background(.blue)
+                            .cornerRadius(20)
+                        Text(food.recipe)
+                            .padding(40)
                             
-                        Text("RECIPE: \(food.recipe)")
-                            
-                        }.padding(10)
+                        }
                         .font(.system(size:15))
                         
                 }

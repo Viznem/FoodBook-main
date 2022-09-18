@@ -11,7 +11,7 @@
 //    @Binding var isOpen: Bool
 //    @State private var showCRUDview = false
 //
-
+import Kingfisher
 import SwiftUI
 import Firebase
 import FirebaseStorage
@@ -38,15 +38,27 @@ struct UserRecipeView: View {
                                 RecipeDetailView(food: food)
                             } label: {
                                 HStack{
-                                Text(food.name)
+                                KFImage(URL(string: food.urlPath)!)
+                                    .resizable()
+                                    .frame(width: 120, height: 100, alignment: .leading)
+                                    .cornerRadius(15)
+                                    VStack{
+                                        Text(food.name)
+                                            .font(.title)
+                                        Text(food.region)
+                                            .font(.system(size: 10))
+                                        Text(food.type)
+                                            .font(.system(size: 10))
+                                    }.padding(5)
+                                    .frame(height: 80, alignment: .leading)
+                                    Spacer()
                                     Button(action: {
-                                        print(food.id)
-                                        
                                         foods.deleteFood(foodDelete: food)
                                         }, label: {
                                                 Image(systemName: "minus.circle")
                                             })
                                             .buttonStyle(BorderlessButtonStyle())
+                                            .frame(width: 50, height: 50, alignment: .trailing)
                                     }
                                 }
                             }

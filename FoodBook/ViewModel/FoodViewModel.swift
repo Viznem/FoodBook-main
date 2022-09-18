@@ -96,7 +96,32 @@ class FoodViewModel: ObservableObject {
             }
         }
     }
+    func addFood(name: String, type: String, region: String, description: String, recipe: String, urlPath: String){
+        let food = Food(id: UUID().uuidString, name: name, type:type, region: region, description: description, recipe: recipe, isLike: false, urlPath: urlPath)
+        let db = Firestore.firestore()
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {return}
+        let mainfoodRef = db.collection("Food").document(food.id)
+        mainfoodRef.setData([
+            "id": food.id,
+            "name": food.name,
+            "type": food.type,
+            "region": food.region,
+            "isLike": false,
+            "description": food.description,
+            "recipe": food.recipe,
+            "urlPath": food.urlPath])
     
+        let foodRef = db.collection("users").document(uid).collection("foods").document(food.id)
+        foodRef.setData([
+            "id": food.id,
+            "name": food.name,
+            "type": food.type,
+            "region": food.region,
+            "isLike": false,
+            "description": food.description,
+            "recipe": food.recipe,
+            "urlPath": food.urlPath])
+    }
     
     func deleteFood(foodDelete: Food) {
 
